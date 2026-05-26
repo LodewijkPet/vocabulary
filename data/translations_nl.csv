@@ -1,0 +1,501 @@
+id,dutch
+ko-0001,ik
+ko-0002,ik beleefd
+ko-0003,jij
+ko-0004,u
+ko-0005,wij; ons
+ko-0006,iedereen
+ko-0007,hij; die
+ko-0008,zij
+ko-0009,persoon
+ko-0010,man
+ko-0011,vrouw
+ko-0012,kind
+ko-0013,vriend
+ko-0014,familie
+ko-0015,ouders
+ko-0016,vader
+ko-0017,moeder
+ko-0018,oudere broer voor man
+ko-0019,oudere broer voor vrouw
+ko-0020,oudere zus voor man
+ko-0021,oudere zus voor vrouw
+ko-0022,jongere broer of zus
+ko-0023,zoon
+ko-0024,dochter
+ko-0025,echtgenoot
+ko-0026,echtgenote
+ko-0027,leraar
+ko-0028,student
+ko-0029,dokter
+ko-0030,naam
+ko-0031,leeftijd
+ko-0032,verjaardag
+ko-0033,geboorteplaats
+ko-0034,land
+ko-0035,Korea
+ko-0036,Japan
+ko-0037,Verenigde Staten
+ko-0038,dit ding
+ko-0039,dat ding
+ko-0040,dat ding daar
+ko-0041,hier
+ko-0042,daar
+ko-0043,daar ginds
+ko-0044,wat
+ko-0045,wie
+ko-0046,wanneer
+ko-0047,waar
+ko-0048,waarom
+ko-0049,hoe
+ko-0050,hoeveel
+ko-0051,hoeveel
+ko-0052,ja
+ko-0053,nee
+ko-0054,hallo; dag
+ko-0055,dank u
+ko-0056,sorry
+ko-0057,het is oké
+ko-0058,alsjeblieft
+ko-0059,opnieuw
+ko-0060,nu
+ko-0061,vandaag
+ko-0062,gisteren
+ko-0063,morgen
+ko-0064,overmorgen
+ko-0065,ochtend; ontbijt
+ko-0066,lunch; middag
+ko-0067,avond; avondeten
+ko-0068,nacht
+ko-0069,overdag
+ko-0070,dageraad
+ko-0071,tijd; uur
+ko-0072,minuut
+ko-0073,seconde
+ko-0074,dag
+ko-0075,week
+ko-0076,maand; maan
+ko-0077,jaar
+ko-0078,maandag
+ko-0079,dinsdag
+ko-0080,woensdag
+ko-0081,donderdag
+ko-0082,vrijdag
+ko-0083,zaterdag
+ko-0084,zondag
+ko-0085,lente
+ko-0086,zomer
+ko-0087,herfst
+ko-0088,winter
+ko-0089,voormiddag
+ko-0090,namiddag
+ko-0091,weekend
+ko-0092,weekdag
+ko-0093,vrije dag
+ko-0094,eerst; van tevoren
+ko-0095,later
+ko-0096,altijd
+ko-0097,soms
+ko-0098,vaak
+ko-0099,snel
+ko-0100,langzaam
+ko-0101,één
+ko-0102,twee
+ko-0103,drie
+ko-0104,vier
+ko-0105,vijf
+ko-0106,zes
+ko-0107,zeven
+ko-0108,acht
+ko-0109,negen
+ko-0110,tien
+ko-0111,honderd
+ko-0112,duizend
+ko-0113,tienduizend
+ko-0114,eerste
+ko-0115,tweede
+ko-0116,een beetje
+ko-0117,veel
+ko-0118,alles; iedereen
+ko-0119,alles
+ko-0120,helft
+ko-0121,teller voor dingen
+ko-0122,teller voor mensen
+ko-0123,keer; nummer
+ko-0124,won
+ko-0125,geld
+ko-0126,prijs
+ko-0127,gratis
+ko-0128,duur
+ko-0129,goedkoop
+ko-0130,veel zijn
+ko-0131,weinig zijn
+ko-0132,groot
+ko-0133,klein
+ko-0134,lang
+ko-0135,kort
+ko-0136,hoog
+ko-0137,laag
+ko-0138,zwaar
+ko-0139,licht
+ko-0140,snel
+ko-0141,eten
+ko-0142,rijst; maaltijd
+ko-0143,water
+ko-0144,thee; auto
+ko-0145,koffie
+ko-0146,melk
+ko-0147,sap
+ko-0148,alcohol
+ko-0149,bier
+ko-0150,vlees
+ko-0151,rundvlees
+ko-0152,varkensvlees
+ko-0153,kippenvlees
+ko-0154,vis als eten
+ko-0155,ei
+ko-0156,brood
+ko-0157,rijstcake
+ko-0158,soep
+ko-0159,kimchi
+ko-0160,ramen
+ko-0161,noedels
+ko-0162,fruit
+ko-0163,appel
+ko-0164,banaan
+ko-0165,sinaasappel
+ko-0166,aardbei
+ko-0167,druiven
+ko-0168,groenten
+ko-0169,aardappel
+ko-0170,zoete aardappel
+ko-0171,wortel
+ko-0172,ui
+ko-0173,knoflook
+ko-0174,zout
+ko-0175,suiker
+ko-0176,smaak
+ko-0177,zoet
+ko-0178,zout
+ko-0179,pittig
+ko-0180,bitter
+ko-0181,zuur
+ko-0182,lekker
+ko-0183,niet lekker
+ko-0184,hongerig
+ko-0185,dorstig
+ko-0186,eten
+ko-0187,drinken
+ko-0188,koken
+ko-0189,bestellen
+ko-0190,kopen
+ko-0191,verkopen
+ko-0192,restaurant
+ko-0193,café
+ko-0194,menu
+ko-0195,bord
+ko-0196,kop; beker
+ko-0197,lepel
+ko-0198,eetstokjes
+ko-0199,koelkast
+ko-0200,keuken
+ko-0201,huis; thuis
+ko-0202,kamer
+ko-0203,woonkamer
+ko-0204,toilet; badkamer
+ko-0205,deur
+ko-0206,raam
+ko-0207,vloer
+ko-0208,muur
+ko-0209,plafond
+ko-0210,bed
+ko-0211,stoel
+ko-0212,bureau
+ko-0213,tafel
+ko-0214,bank
+ko-0215,kleren
+ko-0216,schoenen
+ko-0217,tas
+ko-0218,portemonnee
+ko-0219,sleutel
+ko-0220,klok; horloge
+ko-0221,telefoon
+ko-0222,mobiele telefoon
+ko-0223,computer
+ko-0224,televisie
+ko-0225,boek
+ko-0226,papier
+ko-0227,pen
+ko-0228,foto
+ko-0229,tekening; afbeelding
+ko-0230,muziek
+ko-0231,film
+ko-0232,spel
+ko-0233,cadeau
+ko-0234,medicijn
+ko-0235,munt
+ko-0236,paraplu
+ko-0237,bril
+ko-0238,hoed
+ko-0239,shirt
+ko-0240,broek
+ko-0241,rok
+ko-0242,jas
+ko-0243,sokken
+ko-0244,zakdoek
+ko-0245,zeep
+ko-0246,handdoek
+ko-0247,tandenborstel
+ko-0248,tandpasta
+ko-0249,lamp
+ko-0250,airco
+ko-0251,wasmachine
+ko-0252,stofzuiger
+ko-0253,schaar
+ko-0254,mes
+ko-0255,doos
+ko-0256,envelop; zak
+ko-0257,fles
+ko-0258,afval
+ko-0259,vuur; licht
+ko-0260,ding; voorwerp
+ko-0261,school
+ko-0262,bedrijf
+ko-0263,kantoor
+ko-0264,ziekenhuis
+ko-0265,apotheek
+ko-0266,bank
+ko-0267,postkantoor
+ko-0268,winkel
+ko-0269,markt
+ko-0270,supermarkt
+ko-0271,avondwinkel
+ko-0272,bibliotheek
+ko-0273,museum
+ko-0274,park
+ko-0275,bioscoop
+ko-0276,station
+ko-0277,luchthaven
+ko-0278,bus
+ko-0279,metro
+ko-0280,trein
+ko-0281,taxi
+ko-0282,auto
+ko-0283,fiets
+ko-0284,weg
+ko-0285,straat; afstand
+ko-0286,kruispunt
+ko-0287,stad
+ko-0288,dorp
+ko-0289,zee
+ko-0290,berg
+ko-0291,rivier
+ko-0292,eiland
+ko-0293,voor
+ko-0294,achter
+ko-0295,naast
+ko-0296,binnen
+ko-0297,buiten
+ko-0298,boven
+ko-0299,onder
+ko-0300,links
+ko-0301,rechts
+ko-0302,noorden
+ko-0303,zuiden
+ko-0304,oosten
+ko-0305,westen
+ko-0306,gaan
+ko-0307,komen
+ko-0308,rijden; nemen
+ko-0309,uitstappen
+ko-0310,lopen
+ko-0311,rennen
+ko-0312,autorijden
+ko-0313,zoeken; vinden
+ko-0314,ontmoeten
+ko-0315,wachten
+ko-0316,aankomen
+ko-0317,vertrekken
+ko-0318,binnengaan
+ko-0319,naar buiten komen
+ko-0320,voorbijgaan
+ko-0321,lucht
+ko-0322,zon
+ko-0323,ster
+ko-0324,wolk
+ko-0325,regen
+ko-0326,sneeuw; oog
+ko-0327,wind
+ko-0328,weer
+ko-0329,temperatuur
+ko-0330,koud
+ko-0331,heet; warm
+ko-0332,warm
+ko-0333,koel; verfrissend
+ko-0334,bewolkt
+ko-0335,helder; zonnig
+ko-0336,nat worden
+ko-0337,drogen
+ko-0338,bloeien
+ko-0339,bloem
+ko-0340,boom
+ko-0341,blad
+ko-0342,gras
+ko-0343,steen
+ko-0344,aarde
+ko-0345,bos
+ko-0346,dier
+ko-0347,hond
+ko-0348,kat
+ko-0349,vogel
+ko-0350,vis
+ko-0351,paard; woorden
+ko-0352,koe
+ko-0353,varken
+ko-0354,kip
+ko-0355,insect
+ko-0356,golf
+ko-0357,zand
+ko-0358,meer
+ko-0359,het regent
+ko-0360,het sneeuwt
+ko-0361,aarde
+ko-0362,wereld
+ko-0363,milieu
+ko-0364,geluid
+ko-0365,geur
+ko-0366,lichaam
+ko-0367,hoofd; haar
+ko-0368,gezicht
+ko-0369,oor
+ko-0370,neus
+ko-0371,mond
+ko-0372,nek; keel
+ko-0373,schouder
+ko-0374,arm
+ko-0375,hand
+ko-0376,vinger
+ko-0377,been; brug
+ko-0378,voet
+ko-0379,teen
+ko-0380,buik; boot
+ko-0381,rug; lamp
+ko-0382,hart
+ko-0383,bloed
+ko-0384,huid
+ko-0385,gezondheid
+ko-0386,ziekte
+ko-0387,verkoudheid
+ko-0388,koorts; hitte
+ko-0389,pijn doen; ziek zijn
+ko-0390,rusten
+ko-0391,slapen
+ko-0392,wakker worden; gebeuren
+ko-0393,wassen
+ko-0394,lachen
+ko-0395,huilen
+ko-0396,blij
+ko-0397,verdrietig
+ko-0398,boos
+ko-0399,bang; eng
+ko-0400,moe
+ko-0401,zich zorgen maken
+ko-0402,leuk vinden
+ko-0403,niet leuk vinden
+ko-0404,houden van
+ko-0405,denken
+ko-0406,weten
+ko-0407,niet weten
+ko-0408,zich herinneren
+ko-0409,vergeten
+ko-0410,leren
+ko-0411,lesgeven
+ko-0412,lezen
+ko-0413,schrijven; gebruiken
+ko-0414,luisteren; horen
+ko-0415,spreken
+ko-0416,zien; kijken
+ko-0417,voelen
+ko-0418,openen
+ko-0419,sluiten
+ko-0420,vasthouden; vangen
+ko-0421,doen
+ko-0422,worden
+ko-0423,bestaan; hebben
+ko-0424,niet bestaan; niet hebben
+ko-0425,geven
+ko-0426,ontvangen
+ko-0427,maken
+ko-0428,gebruiken
+ko-0429,beginnen
+ko-0430,eindigen
+ko-0431,afmaken
+ko-0432,werken
+ko-0433,studeren
+ko-0434,spelen
+ko-0435,sporten
+ko-0436,reizen
+ko-0437,bellen
+ko-0438,sturen
+ko-0439,lenen
+ko-0440,uitlenen
+ko-0441,vragen
+ko-0442,antwoorden
+ko-0443,helpen
+ko-0444,nodig hebben; nodig zijn
+ko-0445,willen
+ko-0446,wonen; leven
+ko-0447,sterven
+ko-0448,dragen; aantrekken
+ko-0449,uittrekken
+ko-0450,schoenen dragen
+ko-0451,zitten
+ko-0452,staan
+ko-0453,neerleggen
+ko-0454,erin doen
+ko-0455,eruit halen
+ko-0456,veranderen
+ko-0457,kiezen
+ko-0458,kwijtraken
+ko-0459,oppakken
+ko-0460,schoonmaken
+ko-0461,voorbereiden
+ko-0462,reserveren
+ko-0463,annuleren
+ko-0464,bevestigen
+ko-0465,uitleggen
+ko-0466,begrijpen
+ko-0467,oefenen
+ko-0468,een vraag stellen
+ko-0469,slagen
+ko-0470,mislukken
+ko-0471,goed
+ko-0472,slecht
+ko-0473,nieuw
+ko-0474,oud
+ko-0475,mooi; schattig
+ko-0476,prachtig
+ko-0477,schattig
+ko-0478,makkelijk
+ko-0479,moeilijk
+ko-0480,interessant; leuk
+ko-0481,saai
+ko-0482,stil
+ko-0483,luidruchtig
+ko-0484,schoon
+ko-0485,vies
+ko-0486,veilig
+ko-0487,gevaarlijk
+ko-0488,belangrijk
+ko-0489,speciaal
+ko-0490,hetzelfde; zoals
+ko-0491,anders
+ko-0492,juist
+ko-0493,fout
+ko-0494,samen
+ko-0495,alleen
+ko-0496,maar
+ko-0497,en
+ko-0498,dus
+ko-0499,omdat
+ko-0500,echt

@@ -1,0 +1,322 @@
+id,word_ids,korean,dutch
+s-0001,ko-0002|ko-0061|ko-0142|ko-0186,저는 오늘 밥을 먹어요.,Ik eet vandaag rijst.
+s-0002,ko-0005|ko-0143|ko-0187,우리는 물을 마셔요.,Wij drinken water.
+s-0003,ko-0013|ko-0201|ko-0307,친구가 집에 와요.,Een vriend komt naar huis.
+s-0004,ko-0028|ko-0261|ko-0306,학생이 학교에 가요.,De student gaat naar school.
+s-0005,ko-0012|ko-0274|ko-0311,아이가 공원에서 뛰어요.,Het kind rent in het park.
+s-0006,ko-0002|ko-0225|ko-0412,저는 책을 읽어요.,Ik lees een boek.
+s-0007,ko-0008|ko-0230|ko-0414,그녀는 음악을 들어요.,Zij luistert naar muziek.
+s-0008,ko-0002|ko-0231|ko-0416,저는 영화를 봐요.,Ik kijk een film.
+s-0009,ko-0013|ko-0437,친구가 전화해요.,Een vriend belt.
+s-0010,ko-0002|ko-0145|ko-0187,저는 커피를 마셔요.,Ik drink koffie.
+s-0011,ko-0005|ko-0192|ko-0159|ko-0186,우리는 식당에서 김치를 먹어요.,Wij eten kimchi in het restaurant.
+s-0012,ko-0017|ko-0200|ko-0188,어머니가 부엌에서 요리해요.,Moeder kookt in de keuken.
+s-0013,ko-0016|ko-0144|ko-0312,아버지가 차를 운전해요.,Vader rijdt auto.
+s-0014,ko-0002|ko-0278|ko-0308,저는 버스를 타요.,Ik neem de bus.
+s-0015,ko-0005|ko-0276|ko-0280|ko-0315,우리는 역에서 기차를 기다려요.,Wij wachten op de trein bij het station.
+s-0016,ko-0013|ko-0269|ko-0162|ko-0190,친구가 시장에서 과일을 사요.,Een vriend koopt fruit op de markt.
+s-0017,ko-0268|ko-0215|ko-0191,가게에서 옷을 팔아요.,De winkel verkoopt kleren.
+s-0018,ko-0029|ko-0264|ko-0423,의사가 병원에 있어요.,De dokter is in het ziekenhuis.
+s-0019,ko-0265|ko-0234|ko-0190,약국에서 약을 사요.,Ik koop medicijnen bij de apotheek.
+s-0020,ko-0266|ko-0041|ko-0423,은행은 여기 있어요.,De bank is hier.
+s-0021,ko-0272|ko-0225|ko-0412,도서관에서 책을 읽어요.,Ik lees een boek in de bibliotheek.
+s-0022,ko-0273|ko-0009|ko-0130|ko-0423,박물관에 사람이 많아요.,Er zijn veel mensen in het museum.
+s-0023,ko-0289|ko-0295|ko-0290|ko-0423,바다 옆에 산이 있어요.,Er is een berg naast de zee.
+s-0024,ko-0291|ko-0294|ko-0288|ko-0423,강 뒤에 마을이 있어요.,Achter de rivier ligt een dorp.
+s-0025,ko-0321|ko-0324|ko-0423,하늘에 구름이 있어요.,Er zijn wolken aan de hemel.
+s-0026,ko-0061|ko-0325|ko-0307|ko-0359,오늘 비가 와요.,Vandaag regent het.
+s-0027,ko-0063|ko-0326|ko-0307|ko-0360,내일 눈이 와요.,Morgen sneeuwt het.
+s-0028,ko-0327|ko-0333,바람이 시원해요.,De wind is koel.
+s-0029,ko-0328|ko-0332,날씨가 따뜻해요.,Het weer is warm.
+s-0030,ko-0339|ko-0085|ko-0338,꽃이 봄에 피어요.,Bloemen bloeien in de lente.
+s-0031,ko-0340|ko-0341|ko-0130|ko-0423,나무에 잎이 많아요.,De boom heeft veel bladeren.
+s-0032,ko-0348|ko-0210|ko-0298|ko-0423,고양이가 침대 위에 있어요.,De kat ligt op het bed.
+s-0033,ko-0347|ko-0297|ko-0311,개가 밖에서 뛰어요.,De hond rent buiten.
+s-0034,ko-0350|ko-0143|ko-0423,물고기가 물에 있어요.,De vis is in het water.
+s-0035,ko-0351|ko-0100|ko-0310,말이 천천히 걸어요.,Het paard loopt langzaam.
+s-0036,ko-0352|ko-0342|ko-0186,소가 풀을 먹어요.,De koe eet gras.
+s-0037,ko-0354|ko-0065|ko-0395,닭이 아침에 울어요.,De kip kraait in de ochtend.
+s-0038,ko-0002|ko-0367|ko-0389,저는 머리가 아파요.,Mijn hoofd doet pijn.
+s-0039,ko-0012|ko-0375|ko-0393,아이가 손을 씻어요.,Het kind wast de handen.
+s-0040,ko-0016|ko-0264|ko-0390,아버지가 병원에서 쉬어요.,Vader rust in het ziekenhuis.
+s-0041,ko-0002|ko-0068|ko-0391,저는 밤에 자요.,Ik slaap 's nachts.
+s-0042,ko-0061|ko-0065|ko-0392,오늘 아침에 일어나요.,Vandaag word ik in de ochtend wakker.
+s-0043,ko-0013|ko-0394,친구가 웃어요.,Een vriend lacht.
+s-0044,ko-0012|ko-0395,아이가 울어요.,Het kind huilt.
+s-0045,ko-0002|ko-0116|ko-0400,저는 조금 피곤해요.,Ik ben een beetje moe.
+s-0046,ko-0008|ko-0500|ko-0396,그녀는 정말 기뻐요.,Zij is echt blij.
+s-0047,ko-0005|ko-0401,우리는 걱정해요.,Wij maken ons zorgen.
+s-0048,ko-0002|ko-0038|ko-0402,저는 이것을 좋아해요.,Ik vind dit leuk.
+s-0049,ko-0007|ko-0039|ko-0403,그는 그것을 싫어해요.,Hij vindt dat niet leuk.
+s-0050,ko-0002|ko-0003|ko-0404,저는 너를 사랑해요.,Ik houd van jou.
+s-0051,ko-0005|ko-0494|ko-0433,우리는 함께 공부해요.,Wij studeren samen.
+s-0052,ko-0027|ko-0028|ko-0411,선생님이 학생을 가르쳐요.,De leraar geeft les aan de student.
+s-0053,ko-0028|ko-0468,학생이 질문해요.,De student stelt een vraag.
+s-0054,ko-0027|ko-0442,선생님이 대답해요.,De leraar antwoordt.
+s-0055,ko-0002|ko-0030|ko-0413,저는 이름을 써요.,Ik schrijf een naam.
+s-0056,ko-0013|ko-0228|ko-0438,친구가 사진을 보내요.,Een vriend stuurt een foto.
+s-0057,ko-0013|ko-0465|ko-0002|ko-0414,친구가 설명하고 저는 들어요.,Een vriend legt uit en ik luister.
+s-0058,ko-0002|ko-0205|ko-0418,저는 문을 열어요.,Ik open de deur.
+s-0059,ko-0026|ko-0206|ko-0419,아내가 창문을 닫아요.,Mijn vrouw sluit het raam.
+s-0060,ko-0023|ko-0255|ko-0427,아들이 상자를 만들어요.,De zoon maakt een doos.
+s-0061,ko-0024|ko-0233|ko-0426,딸이 선물을 받아요.,De dochter krijgt een cadeau.
+s-0062,ko-0002|ko-0013|ko-0233|ko-0425,저는 친구에게 선물을 줘요.,Ik geef een cadeau aan een vriend.
+s-0063,ko-0262|ko-0432,회사에서 일해요.,Ik werk bij het bedrijf.
+s-0064,ko-0005|ko-0063|ko-0436,우리는 내일 여행해요.,Wij reizen morgen.
+s-0065,ko-0232|ko-0430,게임이 끝나요.,Het spel eindigt.
+s-0066,ko-0002|ko-0202|ko-0460,저는 방을 청소해요.,Ik maak de kamer schoon.
+s-0067,ko-0022|ko-0216|ko-0450,동생이 신발을 신어요.,Het jongere kind trekt schoenen aan.
+s-0068,ko-0019|ko-0242|ko-0448,오빠가 코트를 입어요.,Oudere broer trekt een jas aan.
+s-0069,ko-0021|ko-0238|ko-0449,언니가 모자를 벗어요.,Oudere zus doet de hoed af.
+s-0070,ko-0002|ko-0211|ko-0451,저는 의자에 앉아요.,Ik zit op de stoel.
+s-0071,ko-0010|ko-0293|ko-0452,남자가 앞에 서요.,De man staat vooraan.
+s-0072,ko-0011|ko-0217|ko-0453,여자가 가방을 놓아요.,De vrouw zet de tas neer.
+s-0073,ko-0012|ko-0217|ko-0225|ko-0454,아이가 가방에 책을 넣어요.,Het kind doet een boek in de tas.
+s-0074,ko-0002|ko-0218|ko-0125|ko-0455,저는 지갑에서 돈을 빼요.,Ik haal geld uit de portemonnee.
+s-0075,ko-0013|ko-0284|ko-0456,친구가 길을 바꿔요.,Een vriend verandert de weg.
+s-0076,ko-0002|ko-0236|ko-0458,저는 우산을 잃어버려요.,Ik verlies de paraplu.
+s-0077,ko-0008|ko-0235|ko-0459,그녀가 동전을 주워요.,Zij pakt de munt op.
+s-0078,ko-0002|ko-0193|ko-0462,저는 카페를 예약해요.,Ik reserveer het cafe.
+s-0079,ko-0013|ko-0463,친구가 취소해요.,Een vriend annuleert.
+s-0080,ko-0002|ko-0038|ko-0464,저는 이것을 확인해요.,Ik bevestig dit.
+s-0081,ko-0005|ko-0494|ko-0467,우리는 함께 연습해요.,Wij oefenen samen.
+s-0082,ko-0028|ko-0469,학생이 성공해요.,De student slaagt.
+s-0083,ko-0002|ko-0097|ko-0470,저는 가끔 실패해요.,Ik faal soms.
+s-0084,ko-0038|ko-0471,이것은 좋아요.,Dit is goed.
+s-0085,ko-0007|ko-0202|ko-0484,그 방은 깨끗해요.,Die kamer is schoon.
+s-0086,ko-0204|ko-0485,화장실은 더러워요.,Het toilet is vies.
+s-0087,ko-0284|ko-0487,길이 위험해요.,De weg is gevaarlijk.
+s-0088,ko-0274|ko-0486,공원이 안전해요.,Het park is veilig.
+s-0089,ko-0039|ko-0488,그것은 중요해요.,Dat is belangrijk.
+s-0090,ko-0061|ko-0489,오늘은 특별해요.,Vandaag is speciaal.
+s-0091,ko-0038|ko-0040|ko-0490,이것과 저것은 같아요.,Dit en dat daar zijn hetzelfde.
+s-0092,ko-0038|ko-0039|ko-0491,이것과 그것은 달라요.,Dit en dat zijn verschillend.
+s-0093,ko-0038|ko-0492,이것이 맞아요.,Dit is correct.
+s-0094,ko-0039|ko-0493,그것이 틀려요.,Dat is fout.
+s-0095,ko-0002|ko-0495|ko-0310,저는 혼자 걸어요.,Ik loop alleen.
+s-0096,ko-0005|ko-0494|ko-0434,우리는 함께 놀아요.,Wij spelen samen.
+s-0097,ko-0002|ko-0500|ko-0407,저는 정말 몰라요.,Ik weet het echt niet.
+s-0098,ko-0005|ko-0497|ko-0306,그리고 우리는 가요.,En wij gaan.
+s-0099,ko-0496|ko-0002|ko-0306,하지만 저는 가요.,Maar ik ga.
+s-0100,ko-0498|ko-0002|ko-0390,그래서 저는 쉬어요.,Daarom rust ik.
+s-0101,ko-0499|ko-0002|ko-0389,왜냐하면 저는 아파요.,Omdat ik ziek ben.
+s-0102,ko-0044|ko-0445,무엇을 원해요?,Wat wil je?
+s-0103,ko-0045|ko-0314,누구를 만나요?,Wie ontmoet je?
+s-0104,ko-0046|ko-0306,언제 가요?,Wanneer ga je?
+s-0105,ko-0047|ko-0423,어디에 있어요?,Waar is het?
+s-0106,ko-0048|ko-0395,왜 울어요?,Waarom huil je?
+s-0107,ko-0049|ko-0427,어떻게 만들어요?,Hoe maak je het?
+s-0108,ko-0050|ko-0445,얼마를 원해요?,Hoeveel wil je?
+s-0109,ko-0051|ko-0121|ko-0445,몇 개를 원해요?,Hoeveel stuks wil je?
+s-0110,ko-0052|ko-0002|ko-0306,네 저는 가요.,Ja ik ga.
+s-0111,ko-0053|ko-0002|ko-0407,아니요 저는 몰라요.,Nee ik weet het niet.
+s-0112,ko-0054|ko-0013|ko-0314,안녕 친구를 만나요.,Hallo ik ontmoet een vriend.
+s-0113,ko-0055|ko-0500,정말 감사합니다.,Echt bedankt.
+s-0114,ko-0056|ko-0500,정말 죄송합니다.,Het spijt me echt.
+s-0115,ko-0057|ko-0038,이것은 괜찮아요.,Dit is oké.
+s-0116,ko-0058|ko-0002|ko-0443,제발 저를 도와줘요.,Help mij alstublieft.
+s-0117,ko-0059|ko-0415,다시 말해요.,Spreek opnieuw.
+s-0118,ko-0060|ko-0005|ko-0429,지금 우리는 시작해요.,Nu beginnen wij.
+s-0119,ko-0062|ko-0013|ko-0314,어제 친구를 만났어요.,Gisteren ontmoette ik een vriend.
+s-0120,ko-0064|ko-0005|ko-0306,모레 우리는 가요.,Overmorgen gaan wij.
+s-0121,ko-0001|ko-0004|ko-0406,나는 당신을 알아요.,Ik ken u.
+s-0122,ko-0006|ko-0014,여러분은 가족이에요.,Jullie zijn familie.
+s-0123,ko-0015|ko-0201|ko-0423,부모가 집에 있어요.,De ouders zijn thuis.
+s-0124,ko-0018|ko-0020|ko-0307,형과 누나가 와요.,Oudere broer en oudere zus komen.
+s-0125,ko-0025|ko-0031|ko-0130,남편의 나이가 많아요.,Mijn man is oud.
+s-0126,ko-0032|ko-0046,생일은 언제예요?,Wanneer is de verjaardag?
+s-0127,ko-0033|ko-0035,고향은 한국이에요.,Mijn geboorteplaats is Korea.
+s-0128,ko-0005|ko-0034|ko-0035,우리 나라는 한국이에요.,Ons land is Korea.
+s-0129,ko-0036|ko-0037|ko-0034,일본과 미국은 나라예요.,Japan en de Verenigde Staten zijn landen.
+s-0130,ko-0263|ko-0223|ko-0423,사무실에 컴퓨터가 있어요.,Er is een computer op kantoor.
+s-0131,ko-0267|ko-0266|ko-0295|ko-0423,우체국은 은행 옆에 있어요.,Het postkantoor is naast de bank.
+s-0132,ko-0270|ko-0146|ko-0190,슈퍼마켓에서 우유를 사요.,Ik koop melk in de supermarkt.
+s-0133,ko-0271|ko-0143|ko-0190,편의점에서 물을 사요.,Ik koop water in de gemakswinkel.
+s-0134,ko-0275|ko-0231|ko-0416,영화관에서 영화를 봐요.,Ik kijk een film in de bioscoop.
+s-0135,ko-0285|ko-0134,거리가 길어요.,De straat is lang.
+s-0136,ko-0286|ko-0282|ko-0452,교차로에서 자동차가 서요.,De auto staat bij het kruispunt.
+s-0137,ko-0287|ko-0483,도시는 시끄러워요.,De stad is lawaaiig.
+s-0138,ko-0042|ko-0217|ko-0423,거기에 가방이 있어요.,Daar is een tas.
+s-0139,ko-0043|ko-0290|ko-0423,저기에 산이 있어요.,Daarginds is een berg.
+s-0140,ko-0219|ko-0313,열쇠를 찾아요.,Ik zoek de sleutel.
+s-0141,ko-0327|ko-0417,바람을 느껴요.,Ik voel de wind.
+s-0142,ko-0375|ko-0420,손을 잡아요.,Ik houd de hand vast.
+s-0143,ko-0044|ko-0421,무엇을 해요?,Wat doe je?
+s-0144,ko-0029|ko-0422,의사가 돼요.,Ik word dokter.
+s-0145,ko-0125|ko-0424,돈이 없어요.,Er is geen geld.
+s-0146,ko-0223|ko-0428,컴퓨터를 사용해요.,Ik gebruik de computer.
+s-0147,ko-0232|ko-0431,게임을 끝내요.,Ik maak het spel af.
+s-0148,ko-0225|ko-0439,책을 빌려요.,Ik leen een boek.
+s-0149,ko-0013|ko-0125|ko-0440,친구에게 돈을 빌려줘요.,Ik leen geld uit aan een vriend.
+s-0150,ko-0071|ko-0444,시간이 필요해요.,Ik heb tijd nodig.
+s-0151,ko-0035|ko-0446,한국에 살아요.,Ik woon in Korea.
+s-0152,ko-0339|ko-0447,꽃이 죽어요.,De bloem sterft.
+s-0153,ko-0215|ko-0457,옷을 골라요.,Ik kies kleren.
+s-0154,ko-0217|ko-0461,가방을 준비해요.,Ik bereid de tas voor.
+s-0155,ko-0066|ko-0186,점심을 먹어요.,Ik eet lunch.
+s-0156,ko-0067|ko-0187,저녁에 물을 마셔요.,Ik drink water in de avond.
+s-0157,ko-0069|ko-0433,낮에 공부해요.,Ik studeer overdag.
+s-0158,ko-0070|ko-0392,새벽에 일어나요.,Ik word wakker bij dageraad.
+s-0159,ko-0071|ko-0424,시간이 없어요.,Er is geen tijd.
+s-0160,ko-0110|ko-0072|ko-0315,열 분 기다려요.,Ik wacht tien minuten.
+s-0161,ko-0073|ko-0320,초가 지나가요.,De seconden gaan voorbij.
+s-0162,ko-0074|ko-0335,날이 맑아요.,De dag is helder.
+s-0163,ko-0075|ko-0430,주가 끝나요.,De week eindigt.
+s-0164,ko-0076|ko-0423,달이 있어요.,Er is een maan.
+s-0165,ko-0077|ko-0430,년이 끝나요.,Het jaar eindigt.
+s-0166,ko-0078|ko-0429,월요일에 시작해요.,Ik begin op maandag.
+s-0167,ko-0079|ko-0314,화요일에 만나요.,Ik ontmoet op dinsdag.
+s-0168,ko-0080|ko-0433,수요일에 공부해요.,Ik studeer op woensdag.
+s-0169,ko-0081|ko-0432,목요일에 일해요.,Ik werk op donderdag.
+s-0170,ko-0082|ko-0436,금요일에 여행해요.,Ik reis op vrijdag.
+s-0171,ko-0083|ko-0434,토요일에 놀아요.,Ik speel op zaterdag.
+s-0172,ko-0084|ko-0390,일요일에 쉬어요.,Ik rust op zondag.
+s-0173,ko-0086|ko-0331,여름은 더워요.,De zomer is warm.
+s-0174,ko-0087|ko-0333,가을은 시원해요.,De herfst is koel.
+s-0175,ko-0088|ko-0330,겨울은 추워요.,De winter is koud.
+s-0176,ko-0089|ko-0437,오전에 전화해요.,Ik bel in de voormiddag.
+s-0177,ko-0090|ko-0435,오후에 운동해요.,Ik sport in de middag.
+s-0178,ko-0091|ko-0231|ko-0416,주말에 영화를 봐요.,Ik kijk een film in het weekend.
+s-0179,ko-0092|ko-0262|ko-0306,평일에 회사에 가요.,Ik ga op werkdagen naar het bedrijf.
+s-0180,ko-0093|ko-0201|ko-0390,휴일에 집에서 쉬어요.,Ik rust thuis op een vrije dag.
+s-0181,ko-0094|ko-0441,먼저 물어봐요.,Vraag het eerst.
+s-0182,ko-0095|ko-0442,나중에 대답해요.,Antwoord later.
+s-0183,ko-0096|ko-0394,항상 웃어요.,Ik lach altijd.
+s-0184,ko-0098|ko-0310,자주 걸어요.,Ik loop vaak.
+s-0185,ko-0099|ko-0307,빨리 와요.,Kom snel.
+s-0186,ko-0163|ko-0101|ko-0186,사과 하나를 먹어요.,Ik eet een appel.
+s-0187,ko-0196|ko-0102|ko-0423,컵 둘이 있어요.,Er zijn twee bekers.
+s-0188,ko-0348|ko-0103|ko-0423,고양이 셋이 있어요.,Er zijn drie katten.
+s-0189,ko-0211|ko-0104|ko-0423,의자 넷이 있어요.,Er zijn vier stoelen.
+s-0190,ko-0166|ko-0105|ko-0190,딸기 다섯을 사요.,Ik koop vijf aardbeien.
+s-0191,ko-0106|ko-0122|ko-0307,여섯 명이 와요.,Zes personen komen.
+s-0192,ko-0107|ko-0123|ko-0412,일곱 번 읽어요.,Ik lees zeven keer.
+s-0193,ko-0108|ko-0121|ko-0427,여덟 개를 만들어요.,Ik maak acht stuks.
+s-0194,ko-0109|ko-0123|ko-0413,아홉 번 써요.,Ik schrijf negen keer.
+s-0195,ko-0110|ko-0123|ko-0414,열 번 들어요.,Ik luister tien keer.
+s-0196,ko-0111|ko-0124,백 원이에요.,Het is honderd won.
+s-0197,ko-0112|ko-0124,천 원이에요.,Het is duizend won.
+s-0198,ko-0113|ko-0124|ko-0444,만 원이 필요해요.,Ik heb tienduizend won nodig.
+s-0199,ko-0114|ko-0012|ko-0307,첫째 아이가 와요.,Het eerste kind komt.
+s-0200,ko-0115|ko-0012|ko-0307,둘째 아이가 와요.,Het tweede kind komt.
+s-0201,ko-0141|ko-0117|ko-0186,음식을 많이 먹어요.,Ik eet veel eten.
+s-0202,ko-0118|ko-0307,모두 와요.,Iedereen komt.
+s-0203,ko-0119|ko-0444,전부 필요해요.,Alles is nodig.
+s-0204,ko-0120|ko-0186,반을 먹어요.,Ik eet de helft.
+s-0205,ko-0009|ko-0131,사람이 적어요.,Er zijn weinig mensen.
+s-0206,ko-0126|ko-0128,값이 비싸요.,De prijs is duur.
+s-0207,ko-0038|ko-0127,이것은 무료예요.,Dit is gratis.
+s-0208,ko-0126|ko-0129,값이 싸요.,De prijs is goedkoop.
+s-0209,ko-0201|ko-0132,집이 커요.,Het huis is groot.
+s-0210,ko-0255|ko-0133,상자가 작아요.,De doos is klein.
+s-0211,ko-0284|ko-0135,길이 짧아요.,De weg is kort.
+s-0212,ko-0290|ko-0136,산이 높아요.,De berg is hoog.
+s-0213,ko-0212|ko-0137,책상이 낮아요.,Het bureau is laag.
+s-0214,ko-0217|ko-0138,가방이 무거워요.,De tas is zwaar.
+s-0215,ko-0226|ko-0139,종이가 가벼워요.,Het papier is licht.
+s-0216,ko-0283|ko-0140,자전거가 빨라요.,De fiets is snel.
+s-0217,ko-0061|ko-0472,오늘은 나빠요.,Vandaag is slecht.
+s-0218,ko-0222|ko-0473,휴대폰이 새로워요.,De mobiele telefoon is nieuw.
+s-0219,ko-0201|ko-0474,집이 오래됐어요.,Het huis is oud.
+s-0220,ko-0241|ko-0475,치마가 예뻐요.,De rok is mooi.
+s-0221,ko-0289|ko-0476,바다가 아름다워요.,De zee is prachtig.
+s-0222,ko-0349|ko-0477,새가 귀여워요.,De vogel is schattig.
+s-0223,ko-0468|ko-0478,질문이 쉬워요.,De vraag is makkelijk.
+s-0224,ko-0468|ko-0479,질문이 어려워요.,De vraag is moeilijk.
+s-0225,ko-0232|ko-0480,게임이 재미있어요.,Het spel is leuk.
+s-0226,ko-0231|ko-0481,영화가 재미없어요.,De film is saai.
+s-0227,ko-0202|ko-0482,방이 조용해요.,De kamer is rustig.
+s-0228,ko-0146|ko-0147|ko-0187,우유와 주스를 마셔요.,Ik drink melk en sap.
+s-0229,ko-0148|ko-0149|ko-0187,술과 맥주를 마셔요.,Ik drink alcohol en bier.
+s-0230,ko-0150|ko-0154|ko-0186,고기와 생선을 먹어요.,Ik eet vlees en vis.
+s-0231,ko-0151|ko-0152|ko-0190,소고기와 돼지고기를 사요.,Ik koop rundvlees en varkensvlees.
+s-0232,ko-0153|ko-0155|ko-0186,닭고기와 계란을 먹어요.,Ik eet kippenvlees en ei.
+s-0233,ko-0156|ko-0157|ko-0186,빵과 떡을 먹어요.,Ik eet brood en rijstcake.
+s-0234,ko-0158|ko-0160|ko-0182,국과 라면이 맛있어요.,Soep en ramen zijn lekker.
+s-0235,ko-0161|ko-0189,국수를 주문해요.,Ik bestel noedels.
+s-0236,ko-0164|ko-0165|ko-0186,바나나와 오렌지를 먹어요.,Ik eet banaan en sinaasappel.
+s-0237,ko-0167|ko-0166|ko-0190,포도와 딸기를 사요.,Ik koop druiven en aardbeien.
+s-0238,ko-0168|ko-0169|ko-0188,채소와 감자를 요리해요.,Ik kook groenten en aardappel.
+s-0239,ko-0170|ko-0171|ko-0186,고구마와 당근을 먹어요.,Ik eet zoete aardappel en wortel.
+s-0240,ko-0172|ko-0173|ko-0454,양파와 마늘을 넣어요.,Ik doe ui en knoflook erin.
+s-0241,ko-0174|ko-0175|ko-0454,소금과 설탕을 넣어요.,Ik doe zout en suiker erin.
+s-0242,ko-0176|ko-0177,맛이 달아요.,De smaak is zoet.
+s-0243,ko-0158|ko-0178,국이 짜요.,De soep is zout.
+s-0244,ko-0159|ko-0179,김치가 매워요.,Kimchi is pittig.
+s-0245,ko-0176|ko-0180,맛이 써요.,De smaak is bitter.
+s-0246,ko-0147|ko-0181,주스가 셔요.,Het sap is zuur.
+s-0247,ko-0160|ko-0183,라면이 맛없어요.,De ramen is niet lekker.
+s-0248,ko-0012|ko-0184,아이가 배고파요.,Het kind heeft honger.
+s-0249,ko-0002|ko-0185,저는 목말라요.,Ik heb dorst.
+s-0250,ko-0194|ko-0416,메뉴를 봐요.,Ik bekijk het menu.
+s-0251,ko-0195|ko-0196|ko-0393,접시와 컵을 씻어요.,Ik was het bord en de beker.
+s-0252,ko-0197|ko-0198|ko-0428,숟가락과 젓가락을 사용해요.,Ik gebruik een lepel en eetstokjes.
+s-0253,ko-0199|ko-0200|ko-0423,냉장고가 부엌에 있어요.,De koelkast staat in de keuken.
+s-0254,ko-0203|ko-0214|ko-0423,거실에 소파가 있어요.,Er is een bank in de woonkamer.
+s-0255,ko-0207|ko-0208|ko-0484,바닥과 벽이 깨끗해요.,De vloer en de muur zijn schoon.
+s-0256,ko-0209|ko-0249|ko-0423,천장에 전등이 있어요.,Er is een lamp aan het plafond.
+s-0257,ko-0212|ko-0227|ko-0423,책상 위에 펜이 있어요.,Er ligt een pen op het bureau.
+s-0258,ko-0213|ko-0299|ko-0219|ko-0423,탁자 아래에 열쇠가 있어요.,Er ligt een sleutel onder de tafel.
+s-0259,ko-0220|ko-0416,시계를 봐요.,Ik kijk naar de klok.
+s-0260,ko-0221|ko-0222|ko-0444,전화와 휴대폰이 필요해요.,Ik heb een telefoon en mobiele telefoon nodig.
+s-0261,ko-0223|ko-0224|ko-0428,컴퓨터와 텔레비전을 사용해요.,Ik gebruik de computer en televisie.
+s-0262,ko-0226|ko-0229|ko-0423,종이와 그림이 있어요.,Er is papier en een afbeelding.
+s-0263,ko-0237|ko-0313,안경을 찾아요.,Ik zoek de bril.
+s-0264,ko-0244|ko-0246|ko-0423,손수건과 수건이 있어요.,Er is een zakdoek en handdoek.
+s-0265,ko-0245|ko-0248|ko-0428,비누와 치약을 사용해요.,Ik gebruik zeep en tandpasta.
+s-0266,ko-0247|ko-0428,칫솔을 사용해요.,Ik gebruik een tandenborstel.
+s-0267,ko-0250|ko-0444,에어컨이 필요해요.,Ik heb airconditioning nodig.
+s-0268,ko-0251|ko-0252|ko-0423,세탁기와 청소기가 있어요.,Er is een wasmachine en stofzuiger.
+s-0269,ko-0253|ko-0254|ko-0428,가위와 칼을 사용해요.,Ik gebruik een schaar en mes.
+s-0270,ko-0256|ko-0260|ko-0454,봉투에 물건을 넣어요.,Ik doe het voorwerp in de zak.
+s-0271,ko-0257|ko-0143|ko-0423,병에 물이 있어요.,Er zit water in de fles.
+s-0272,ko-0258|ko-0297|ko-0453,쓰레기를 밖에 놓아요.,Ik zet afval buiten neer.
+s-0273,ko-0259|ko-0487,불이 위험해요.,Vuur is gevaarlijk.
+s-0274,ko-0239|ko-0240|ko-0448,셔츠와 바지를 입어요.,Ik trek een overhemd en broek aan.
+s-0275,ko-0241|ko-0243|ko-0457,치마와 양말을 골라요.,Ik kies een rok en sokken.
+s-0276,ko-0277|ko-0316,공항에 도착해요.,Ik kom aan op de luchthaven.
+s-0277,ko-0279|ko-0309,지하철에서 내려요.,Ik stap uit de metro.
+s-0278,ko-0281|ko-0317,택시가 출발해요.,De taxi vertrekt.
+s-0279,ko-0282|ko-0283|ko-0320,자동차와 자전거가 지나가요.,De auto en fiets gaan voorbij.
+s-0280,ko-0292|ko-0306,섬에 가요.,Ik ga naar het eiland.
+s-0281,ko-0296|ko-0009|ko-0423,안에 사람이 있어요.,Er is een persoon binnen.
+s-0282,ko-0300|ko-0301|ko-0416,왼쪽과 오른쪽을 봐요.,Ik kijk naar links en rechts.
+s-0283,ko-0302|ko-0303|ko-0491,북쪽과 남쪽이 달라요.,Noord en zuid zijn verschillend.
+s-0284,ko-0304|ko-0305|ko-0290|ko-0423,동쪽과 서쪽에 산이 있어요.,Er zijn bergen in het oosten en westen.
+s-0285,ko-0202|ko-0318,방에 들어가요.,Ik ga de kamer binnen.
+s-0286,ko-0201|ko-0319,집에서 나와요.,Ik kom uit het huis.
+s-0287,ko-0322|ko-0323|ko-0416,해와 별을 봐요.,Ik zie de zon en sterren.
+s-0288,ko-0343|ko-0344|ko-0423,돌과 흙이 있어요.,Er zijn stenen en aarde.
+s-0289,ko-0345|ko-0482,숲이 조용해요.,Het bos is rustig.
+s-0290,ko-0356|ko-0357|ko-0416,파도와 모래를 봐요.,Ik zie golven en zand.
+s-0291,ko-0358|ko-0350|ko-0423,호수에 물고기가 있어요.,Er is een vis in het meer.
+s-0292,ko-0361|ko-0362|ko-0405,지구와 세계를 생각해요.,Ik denk aan de aarde en de wereld.
+s-0293,ko-0363|ko-0488,환경이 중요해요.,Het milieu is belangrijk.
+s-0294,ko-0364|ko-0365|ko-0417,소리와 냄새를 느껴요.,Ik voel geluid en geur.
+s-0295,ko-0329|ko-0137,기온이 낮아요.,De temperatuur is laag.
+s-0296,ko-0061|ko-0334,오늘은 흐려요.,Vandaag is het bewolkt.
+s-0297,ko-0328|ko-0335,날씨가 맑아요.,Het weer is helder.
+s-0298,ko-0215|ko-0336,옷이 젖어요.,De kleren worden nat.
+s-0299,ko-0246|ko-0337,수건이 말라요.,De handdoek droogt.
+s-0300,ko-0346|ko-0349|ko-0423,동물과 새가 있어요.,Er is een dier en vogel.
+s-0301,ko-0353|ko-0186,돼지가 먹어요.,Het varken eet.
+s-0302,ko-0355|ko-0133,벌레가 작아요.,Het insect is klein.
+s-0303,ko-0366|ko-0368|ko-0393,몸과 얼굴을 씻어요.,Ik was mijn lichaam en gezicht.
+s-0304,ko-0369|ko-0370|ko-0389,귀와 코가 아파요.,Mijn oor en neus doen pijn.
+s-0305,ko-0371|ko-0372|ko-0389,입과 목이 아파요.,Mijn mond en keel doen pijn.
+s-0306,ko-0373|ko-0374|ko-0138,어깨와 팔이 무거워요.,Mijn schouder en arm zijn zwaar.
+s-0307,ko-0376|ko-0379|ko-0389,손가락과 발가락이 아파요.,Mijn vinger en teen doen pijn.
+s-0308,ko-0377|ko-0378|ko-0336,다리와 발이 젖어요.,Mijn been en voet worden nat.
+s-0309,ko-0380|ko-0381|ko-0389,배와 등이 아파요.,Mijn buik en rug doen pijn.
+s-0310,ko-0382|ko-0383|ko-0488,심장과 피는 중요해요.,Het hart en bloed zijn belangrijk.
+s-0311,ko-0384|ko-0484,피부가 깨끗해요.,De huid is schoon.
+s-0312,ko-0385|ko-0488,건강이 중요해요.,Gezondheid is belangrijk.
+s-0313,ko-0386|ko-0387|ko-0423,병과 감기가 있어요.,Er is ziekte en verkoudheid.
+s-0314,ko-0388|ko-0136,열이 높아요.,De koorts is hoog.
+s-0315,ko-0002|ko-0397,저는 슬퍼요.,Ik ben verdrietig.
+s-0316,ko-0004|ko-0398,당신은 화나요.,U bent boos.
+s-0317,ko-0002|ko-0399,저는 무서워요.,Ik ben bang.
+s-0318,ko-0030|ko-0408,이름을 기억해요.,Ik onthoud de naam.
+s-0319,ko-0030|ko-0409,이름을 잊어요.,Ik vergeet de naam.
+s-0320,ko-0035|ko-0410,한국을 배워요.,Ik leer over Korea.
+s-0321,ko-0038|ko-0466,이것을 이해해요.,Ik begrijp dit.

@@ -1,0 +1,13 @@
+{
+  "name": "korean-vocabulary-matching",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local Korean vocabulary matching game with persisted per-word speed scores.",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
+

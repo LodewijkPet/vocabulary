@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Korean Matching</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="app">
+      <header class="topbar">
+        <div>
+          <h1>Korean Matching</h1>
+          <div class="meta" id="sessionMeta">Loading</div>
+        </div>
+        <div class="controls">
+          <button class="icon-button" id="soundToggle" type="button" title="Toggle speech">Sound</button>
+          <label class="language-control" title="Second language">
+            <span>Second</span>
+            <select id="secondLanguageSelect">
+              <option value="dutch">Dutch</option>
+              <option value="english">English</option>
+              <option value="japanese">Japanese</option>
+            </select>
+          </label>
+          <button class="icon-button" id="themeButton" type="button" title="Switch theme">Theme</button>
+          <button class="icon-button" id="autoButton" type="button" title="Passive auto answer">Auto</button>
+          <button class="stop-button" id="stopButton" type="button">Stop</button>
+        </div>
+      </header>
+
+      <section class="stats" aria-label="Session stats">
+        <div class="stat">
+          <span>Mode</span>
+          <strong id="modeName">Normal</strong>
+        </div>
+        <div class="stat">
+          <span>Score</span>
+          <strong id="sessionScore">0</strong>
+        </div>
+        <div class="stat">
+          <span>Speed</span>
+          <strong id="speedStat">0 ms</strong>
+        </div>
+        <div class="stat">
+          <span>Correct</span>
+          <strong id="correctStat">0</strong>
+        </div>
+        <div class="stat">
+          <span>Wrong</span>
+          <strong id="wrongStat">0</strong>
+        </div>
+        <div class="stat challenge-stat" id="challengeStat">
+          <span>Challenge</span>
+          <strong id="challengeScore">0</strong>
+        </div>
+      </section>
+
+      <section class="mode-banner hidden" id="modeBanner" aria-live="polite">
+        <div>
+          <span id="modeBadge">Special mode</span>
+          <strong id="modeBannerTitle">Mode</strong>
+        </div>
+        <div class="mode-detail" id="modeBannerDetail"></div>
+      </section>
+
+      <section class="writing-panel hidden" id="writingPanel" aria-label="Writing round">
+        <div class="writing-shell">
+          <div class="writing-top">
+            <div>
+              <div class="side-title" id="writingPromptKind">Writing</div>
+              <div class="writing-prompt" id="writingPromptText"></div>
+              <div class="writing-meta" id="writingPromptMeta"></div>
+            </div>
+            <button class="icon-button" id="writingReplay" type="button">Replay</button>
+          </div>
+          <form class="writing-form" id="writingForm" autocomplete="off">
+            <input
+              id="writingInput"
+              lang="ko"
+              spellcheck="false"
+              autocapitalize="off"
+              autocomplete="off"
+              inputmode="text"
+              aria-label="Korean answer"
+            >
+            <button class="stop-button" type="submit">Check</button>
+          </form>
+          <div class="writing-progress" id="writingProgress"></div>
+        </div>
+      </section>
+
+      <section class="board" id="board" aria-label="Matching board">
+        <div class="side left-side">
+          <div class="side-title">Q W E R / A S D F</div>
+          <div class="slot-grid" id="leftGrid"></div>
+        </div>
+        <div class="board-divider"></div>
+        <div class="side right-side">
+          <div class="side-title">U I O P / J K L ;</div>
+          <div class="slot-grid" id="rightGrid"></div>
+        </div>
+      </section>
+
+      <section class="sentence-panel hidden" id="sentencePanel" aria-label="Example sentences" aria-live="polite">
+        <div class="sentence-list" id="sentenceList"></div>
+      </section>
+
+      <section class="message-log" id="messageLog" aria-live="polite"></section>
+
+      <section class="report hidden" id="report">
+        <div class="report-header">
+          <div>
+            <h2>Score Progression</h2>
+            <div class="meta" id="reportMeta"></div>
+          </div>
+          <button class="icon-button" id="resumeButton" type="button">Resume</button>
+        </div>
+        <div class="chart-wrap">
+          <svg id="scoreChart" viewBox="0 0 920 420" role="img" aria-label="Score progression chart"></svg>
+          <div class="tooltip hidden" id="chartTooltip"></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
