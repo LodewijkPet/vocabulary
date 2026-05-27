@@ -21,6 +21,30 @@ const PASSIVE_THEME_PAIR_LIMIT = 5;
 const PASSIVE_THEMES = ["normal", "reverse", "sound", "group"];
 const SENTENCE_SAMPLE_SIZE = 3;
 const GAME_ID = "matching";
+const TRAINING_SELECTION_KEY = "matchingTrainingSelection";
+const DEFAULT_TRAINING_SELECTION = {
+  keywords: "",
+  minScore: "",
+  maxScore: "",
+  count: "",
+  mode: "lowest"
+};
+const TRAINING_SELECTION_MODES = new Set(["lowest", "least", "highest", "random"]);
+
+function createSessionId() {
+  return `matching-${new Date().toISOString().replace(/[-:.TZ]/g, "")}-${Math.random()
+    .toString(16)
+    .slice(2, 8)}`;
+}
+
+function createThemeStats() {
+  return Object.fromEntries(
+    Object.keys(THEMES).map((id) => [
+      id,
+      { attempts: 0, correct: 0, wrong: 0, totalDelta: 0, totalMs: 0 }
+    ])
+  );
+}
 
 const SECOND_LANGUAGES = {
   dutch: {
@@ -170,9 +194,7 @@ const state = {
   pairStartedAt: 0,
   pendingRefill: [],
   boardId: crypto.randomUUID(),
-  sessionId: `matching-${new Date().toISOString().replace(/[-:.TZ]/g, "")}-${Math.random()
-    .toString(16)
-    .slice(2, 8)}`,
+  sessionId: createSessionId(),
   currentTheme: THEMES.normal,
   themeAttempts: 0,
   normalWordsSinceSpecial: 0,
@@ -187,12 +209,16 @@ const state = {
   changedIds: new Set(),
   recentWordIds: [],
   recentWordSet: new Set(),
-  themeStats: Object.fromEntries(
-    Object.keys(THEMES).map((id) => [
-      id,
-      { attempts: 0, correct: 0, wrong: 0, totalDelta: 0, totalMs: 0 }
-    ])
-  ),
+  trainingSelection: {
+    settings: { ...DEFAULT_TRAINING_SELECTION },
+    activeIds: new Set(),
+    matchCount: 0,
+    selectedCount: 0,
+    warning: "",
+    focusLabel: ""
+  },
+  reportRows: [],
+  themeStats: createThemeStats(),
   soundEnabled: true,
   locked: false,
   stopped: false,
@@ -237,6 +263,14 @@ const elements = {
   messageLog: document.querySelector("#messageLog"),
   soundToggle: document.querySelector("#soundToggle"),
   secondLanguageSelect: document.querySelector("#secondLanguageSelect"),
+  trainingForm: document.querySelector("#trainingForm"),
+  keywordFilter: document.querySelector("#keywordFilter"),
+  scoreMin: document.querySelector("#scoreMin"),
+  scoreMax: document.querySelector("#scoreMax"),
+  wordCount: document.querySelector("#wordCount"),
+  selectionMode: document.querySelector("#selectionMode"),
+  resetTraining: document.querySelector("#resetTraining"),
+  selectionSummary: document.querySelector("#selectionSummary"),
   themeButton: document.querySelector("#themeButton"),
   autoButton: document.querySelector("#autoButton"),
   stopButton: document.querySelector("#stopButton"),
@@ -244,7 +278,13 @@ const elements = {
   report: document.querySelector("#report"),
   reportMeta: document.querySelector("#reportMeta"),
   scoreChart: document.querySelector("#scoreChart"),
-  chartTooltip: document.querySelector("#chartTooltip")
+  chartTooltip: document.querySelector("#chartTooltip"),
+  reportStats: document.querySelector("#reportStats"),
+  focusWrong: document.querySelector("#focusWrong"),
+  focusWorstHalf: document.querySelector("#focusWorstHalf"),
+  focusBestHalf: document.querySelector("#focusBestHalf"),
+  focusChanged: document.querySelector("#focusChanged"),
+  wordReportBody: document.querySelector("#wordReportBody")
 };
 
 async function init() {
@@ -259,6 +299,11 @@ async function init() {
   state.scores = new Map(
     Object.entries(data.scores || {}).map(([id, score]) => [id, normalizeScore(score)])
   );
+  applyTrainingSelection(loadTrainingSelection(), {
+    persist: false,
+    resetBoard: false,
+    silent: true
+  });
   createInitialBoard();
   bindEvents();
   refreshVoices();
@@ -277,6 +322,295 @@ function normalizeScore(score) {
     last_delta: Number(score.last_delta ?? 0),
     updated_at: score.updated_at || ""
   };
+}
+
+function loadTrainingSelection() {
+  try {
+    const stored = JSON.parse(localStorage.getItem(TRAINING_SELECTION_KEY) || "null");
+    return stored && typeof stored === "object" ? stored : DEFAULT_TRAINING_SELECTION;
+  } catch {
+    return DEFAULT_TRAINING_SELECTION;
+  }
+}
+
+function saveTrainingSelection(settings) {
+  localStorage.setItem(TRAINING_SELECTION_KEY, JSON.stringify(settings));
+}
+
+function normalizeTrainingSelection(rawSettings) {
+  const settings = {
+    ...DEFAULT_TRAINING_SELECTION,
+    ...(rawSettings && typeof rawSettings === "object" ? rawSettings : {})
+  };
+  let minScore = optionalBoundedInteger(
+    settings.minScore,
+    state.scoreConfig.minScore,
+    state.scoreConfig.maxScore
+  );
+  let maxScore = optionalBoundedInteger(
+    settings.maxScore,
+    state.scoreConfig.minScore,
+    state.scoreConfig.maxScore
+  );
+  const count = optionalBoundedInteger(settings.count, 1, state.vocabulary.length);
+  if (minScore !== null && maxScore !== null && minScore > maxScore) {
+    [minScore, maxScore] = [maxScore, minScore];
+  }
+
+  return {
+    keywords: String(settings.keywords || "").trim(),
+    minScore: minScore === null ? "" : String(minScore),
+    maxScore: maxScore === null ? "" : String(maxScore),
+    count: count === null ? "" : String(count),
+    mode: TRAINING_SELECTION_MODES.has(settings.mode) ? settings.mode : "lowest"
+  };
+}
+
+function optionalBoundedInteger(value, min, max) {
+  if (value === "" || value === null || value === undefined) return null;
+  const number = Math.round(Number(value));
+  if (!Number.isFinite(number)) return null;
+  return clamp(number, min, max);
+}
+
+function clamp(number, min, max) {
+  return Math.max(min, Math.min(max, number));
+}
+
+function handleTrainingSubmit(event) {
+  event.preventDefault();
+  const applied = applyTrainingSelection(readTrainingSelectionForm(), {
+    persist: true,
+    resetBoard: true,
+    silent: false
+  });
+  if (applied) {
+    logMessage(`Training ${state.trainingSelection.selectedCount} words`);
+  }
+}
+
+function resetTrainingSelection() {
+  applyTrainingSelection(DEFAULT_TRAINING_SELECTION, {
+    persist: true,
+    resetBoard: true,
+    silent: false
+  });
+  logMessage("Training all words");
+}
+
+function readTrainingSelectionForm() {
+  return {
+    keywords: elements.keywordFilter.value,
+    minScore: elements.scoreMin.value,
+    maxScore: elements.scoreMax.value,
+    count: elements.wordCount.value,
+    mode: elements.selectionMode.value
+  };
+}
+
+function applyTrainingSelection(rawSettings, options = {}) {
+  const { persist = true, resetBoard = true, silent = false } = options;
+  const settings = normalizeTrainingSelection(rawSettings);
+  const candidates = trainingCandidates(settings);
+  if (candidates.length === 0) {
+    state.trainingSelection.warning = "No matching words";
+    setTrainingFormValues(settings);
+    renderTrainingSummary();
+    if (!silent) logMessage("No words match that selection.");
+    return false;
+  }
+
+  const selected = selectTrainingWords(candidates, settings);
+  state.trainingSelection = {
+    settings,
+    activeIds: new Set(selected.map((word) => word.id)),
+    matchCount: candidates.length,
+    selectedCount: selected.length,
+    warning: "",
+    focusLabel: ""
+  };
+  if (persist) saveTrainingSelection(settings);
+  setTrainingFormValues(settings);
+  renderTrainingSummary();
+
+  if (resetBoard) {
+    resetCurrentBoardForTraining();
+  }
+  return true;
+}
+
+function setTrainingFormValues(settings) {
+  elements.keywordFilter.value = settings.keywords;
+  elements.scoreMin.value = settings.minScore;
+  elements.scoreMax.value = settings.maxScore;
+  elements.wordCount.value = settings.count;
+  elements.selectionMode.value = settings.mode;
+}
+
+function trainingCandidates(settings) {
+  const tokens = keywordTokens(settings.keywords);
+  let minScore = settings.minScore === "" ? null : Number(settings.minScore);
+  let maxScore = settings.maxScore === "" ? null : Number(settings.maxScore);
+  if (minScore !== null && maxScore !== null && minScore > maxScore) {
+    [minScore, maxScore] = [maxScore, minScore];
+  }
+
+  return state.vocabulary.filter((word) => {
+    const score = getScore(word.id).score;
+    if (minScore !== null && score < minScore) return false;
+    if (maxScore !== null && score > maxScore) return false;
+    return matchesKeywordTokens(word, tokens);
+  });
+}
+
+function keywordTokens(value) {
+  return String(value || "")
+    .toLowerCase()
+    .split(/[,\s;]+/)
+    .map((token) => token.trim())
+    .filter(Boolean);
+}
+
+function matchesKeywordTokens(word, tokens) {
+  if (tokens.length === 0) return true;
+  const haystack = [
+    word.id,
+    word.korean,
+    word.english,
+    word.japanese,
+    word.dutch,
+    word.pos,
+    word.topic,
+    topicLabel(word.topic),
+    word.notes
+  ]
+    .join(" ")
+    .toLowerCase();
+  return tokens.some((token) => haystack.includes(token));
+}
+
+function selectTrainingWords(candidates, settings) {
+  const limit = settings.count === "" ? candidates.length : Number(settings.count);
+  const ordered = [...candidates];
+
+  if (settings.mode === "random") {
+    return shuffle(ordered).slice(0, limit);
+  }
+
+  ordered.sort((a, b) => {
+    const scoreA = getScore(a.id).score;
+    const scoreB = getScore(b.id).score;
+    const attemptsA = getScore(a.id).attempts;
+    const attemptsB = getScore(b.id).attempts;
+
+    if (settings.mode === "highest" && scoreA !== scoreB) return scoreB - scoreA;
+    if (settings.mode === "least" && attemptsA !== attemptsB) return attemptsA - attemptsB;
+    if (scoreA !== scoreB) return scoreA - scoreB;
+    return a.id.localeCompare(b.id);
+  });
+
+  return ordered.slice(0, limit);
+}
+
+function resetCurrentBoardForTraining() {
+  if (state.passiveAuto.active) {
+    stopPassiveAuto();
+  }
+  if (state.writingRound) {
+    finishWritingRound(false);
+  } else if (state.activeChallenge) {
+    finishChallenge();
+  }
+  state.currentTheme = THEMES.normal;
+  state.themeAttempts = 0;
+  state.normalWordsSinceSpecial = 0;
+  state.pendingRefill = [];
+  state.recentWordIds = [];
+  state.recentWordSet = new Set();
+  state.locked = false;
+  clearSelection();
+  clearStatuses();
+  createInitialBoard();
+  render();
+}
+
+function applyFocusSelection(ids, label) {
+  const uniqueIds = Array.from(new Set(ids)).filter((id) => state.wordsById.has(id));
+  if (uniqueIds.length === 0) {
+    logMessage("No words available for that focus session.");
+    return false;
+  }
+
+  const settings = { ...DEFAULT_TRAINING_SELECTION };
+  state.trainingSelection = {
+    settings,
+    activeIds: new Set(uniqueIds),
+    matchCount: uniqueIds.length,
+    selectedCount: uniqueIds.length,
+    warning: "",
+    focusLabel: label
+  };
+  setTrainingFormValues(settings);
+  renderTrainingSummary();
+  return true;
+}
+
+function resetSessionProgress() {
+  state.sessionId = createSessionId();
+  state.totalAttempts = 0;
+  state.correct = 0;
+  state.wrong = 0;
+  state.sessionScore = 0;
+  state.lastSpeed = 0;
+  state.sessionEvents = [];
+  state.changedIds = new Set();
+  state.reportRows = [];
+  state.themeStats = createThemeStats();
+  state.currentSentenceSample = [];
+  renderSentenceSample();
+  state.recentWordIds = [];
+  state.recentWordSet = new Set();
+  state.pendingRefill = [];
+  state.boardId = crypto.randomUUID();
+}
+
+function activeWordPool() {
+  const activeIds = state.trainingSelection.activeIds;
+  if (!activeIds || activeIds.size === 0) return state.vocabulary;
+  return state.vocabulary.filter((word) => activeIds.has(word.id));
+}
+
+function activeWordCount() {
+  return activeWordPool().length;
+}
+
+function boardWordCount() {
+  const count = activeWordCount();
+  return Math.max(1, Math.min(BOARD_SIZE, count || state.vocabulary.length));
+}
+
+function trainingWordText() {
+  const selected = state.trainingSelection.selectedCount || activeWordCount();
+  const total = state.vocabulary.length;
+  return selected >= total ? `${total} words` : `${selected}/${total} words`;
+}
+
+function renderTrainingSummary() {
+  if (state.trainingSelection.warning) {
+    elements.selectionSummary.textContent = state.trainingSelection.warning;
+    return;
+  }
+  const { settings, matchCount, selectedCount, focusLabel } = state.trainingSelection;
+  if (focusLabel) {
+    elements.selectionSummary.textContent = `${selectedCount} active / follow-up: ${focusLabel}`;
+    return;
+  }
+  const scoreText =
+    settings.minScore || settings.maxScore
+      ? ` / score ${settings.minScore || state.scoreConfig.minScore}-${settings.maxScore || state.scoreConfig.maxScore}`
+      : "";
+  const keywordText = settings.keywords ? ` / "${settings.keywords}"` : "";
+  elements.selectionSummary.textContent = `${selectedCount} active / ${matchCount} matching${scoreText}${keywordText}`;
 }
 
 function indexExampleSentences() {
@@ -363,6 +697,12 @@ function bindEvents() {
   elements.resumeButton.addEventListener("click", resumeGame);
   elements.writingForm.addEventListener("submit", handleWritingSubmit);
   elements.writingReplay.addEventListener("click", replayWritingPrompt);
+  elements.trainingForm.addEventListener("submit", handleTrainingSubmit);
+  elements.resetTraining.addEventListener("click", resetTrainingSelection);
+  elements.focusWrong.addEventListener("click", () => startFocusSession("wrong"));
+  elements.focusWorstHalf.addEventListener("click", () => startFocusSession("worst"));
+  elements.focusBestHalf.addEventListener("click", () => startFocusSession("best"));
+  elements.focusChanged.addEventListener("click", () => startFocusSession("changed"));
   window.setInterval(() => {
     if (!state.stopped && (state.currentTheme.special || state.activeChallenge)) {
       expireTimedThemeIfNeeded();
@@ -372,12 +712,12 @@ function bindEvents() {
 }
 
 function createInitialBoard() {
-  const words = chooseWords(BOARD_SIZE);
+  const words = chooseWords(boardWordCount());
   setBoardWords(words);
 }
 
 function createPassiveBoard() {
-  const words = choosePassiveWords(BOARD_SIZE);
+  const words = choosePassiveWords(boardWordCount());
   setBoardWords(words);
   state.boardId = crypto.randomUUID();
 }
@@ -406,11 +746,17 @@ function setBoardWords(words) {
 function chooseWords(count, excludeIds = new Set()) {
   const chosen = [];
   const hardExcluded = new Set(excludeIds);
-  while (chosen.length < count && hardExcluded.size + chosen.length < state.vocabulary.length) {
+  const pool = activeWordPool();
+  let guard = 0;
+  while (chosen.length < count && guard < pool.length * 3) {
+    guard += 1;
     const directExcluded = new Set(hardExcluded);
     for (const word of chosen) directExcluded.add(word.id);
     const softExcluded = new Set([...directExcluded, ...state.recentWordIds]);
-    const word = weightedPick(hasAvailableWord(softExcluded) ? softExcluded : directExcluded);
+    const word = weightedPick(
+      hasAvailableWord(softExcluded, pool) ? softExcluded : directExcluded,
+      pool
+    );
     if (!word) break;
     chosen.push(word);
   }
@@ -418,8 +764,8 @@ function chooseWords(count, excludeIds = new Set()) {
   return chosen;
 }
 
-function hasAvailableWord(excludeIds) {
-  return state.vocabulary.some((word) => !excludeIds.has(word.id));
+function hasAvailableWord(excludeIds, pool = activeWordPool()) {
+  return pool.some((word) => !excludeIds.has(word.id));
 }
 
 function rememberSelectedWords(words) {
@@ -439,15 +785,16 @@ function rememberSelectedWords(words) {
 function choosePassiveWords(count, excludeIds = new Set()) {
   const chosen = [];
   const chosenIds = new Set(excludeIds);
+  const pool = activeWordPool();
   let guard = 0;
 
   while (
     chosen.length < count &&
-    chosenIds.size < state.vocabulary.length &&
-    guard < state.vocabulary.length * 2
+    hasAvailableWord(chosenIds, pool) &&
+    guard < pool.length * 2
   ) {
-    const word = state.vocabulary[state.passiveAuto.cursor % state.vocabulary.length];
-    state.passiveAuto.cursor = (state.passiveAuto.cursor + 1) % state.vocabulary.length;
+    const word = pool[state.passiveAuto.cursor % pool.length];
+    state.passiveAuto.cursor = (state.passiveAuto.cursor + 1) % pool.length;
     guard += 1;
     if (chosenIds.has(word.id)) continue;
     chosen.push(word);
@@ -457,8 +804,8 @@ function choosePassiveWords(count, excludeIds = new Set()) {
   return chosen;
 }
 
-function weightedPick(excludeIds) {
-  const candidates = state.vocabulary.filter((word) => !excludeIds.has(word.id));
+function weightedPick(excludeIds, pool = activeWordPool()) {
+  const candidates = pool.filter((word) => !excludeIds.has(word.id));
   if (candidates.length === 0) return null;
 
   let totalWeight = 0;
@@ -604,7 +951,7 @@ async function completeAttempt() {
       clearSelection();
       clearStatuses();
 
-      if (state.pendingRefill.length >= REFILL_SIZE) {
+      if (shouldRefillPendingSlots()) {
         refillMatched();
       }
 
@@ -764,6 +1111,12 @@ function refillMatched() {
 
 function refillPassiveMatched(count = REFILL_SIZE) {
   refillPendingSlots(count, choosePassiveWords);
+}
+
+function shouldRefillPendingSlots() {
+  const threshold = Math.max(1, Math.min(REFILL_SIZE, state.leftSlots.length || boardWordCount()));
+  const hasOpenSlot = state.leftSlots.some((slot) => slot && !slot.cleared);
+  return state.pendingRefill.length >= threshold || !hasOpenSlot;
 }
 
 function refillPendingSlots(count, picker) {
@@ -1017,7 +1370,7 @@ async function passiveAutoStep(generation) {
   clearSelection();
   clearStatuses();
 
-  if (state.pendingRefill.length >= REFILL_SIZE) {
+  if (shouldRefillPendingSlots()) {
     refillPassiveMatched();
   }
 
@@ -1139,8 +1492,8 @@ function render() {
   elements.sessionMeta.textContent = state.stopped
     ? "Stopped"
     : passiveMode
-      ? `Passive auto / ${state.vocabulary.length} words`
-      : `${state.sessionId} / ${state.vocabulary.length} words`;
+      ? `Passive auto / ${trainingWordText()}`
+      : `${state.sessionId} / ${trainingWordText()}`;
   elements.modeName.textContent = passiveMode ? "Passive Auto" : themeLabel();
   elements.sessionScore.textContent = String(state.sessionScore);
   elements.speedStat.textContent = state.lastSpeed ? `${state.lastSpeed} ms` : "0 ms";
@@ -1164,6 +1517,7 @@ function render() {
   } else {
     renderSlots();
   }
+  renderTrainingSummary();
 }
 
 function modeBannerDetail() {
@@ -1707,7 +2061,214 @@ function showReport() {
   elements.report.classList.remove("hidden");
   elements.reportMeta.textContent = `${state.changedIds.size} changed words / ${state.totalAttempts} attempts`;
   drawScoreChart();
+  renderSessionReport();
   elements.report.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function renderSessionReport() {
+  state.reportRows = buildSessionWordReportRows();
+  renderReportStats(state.reportRows);
+  renderWordReportTable(state.reportRows);
+  updateFocusButtons(state.reportRows);
+}
+
+function buildSessionWordReportRows() {
+  const changedEventsByWord = groupEventsByWord();
+  const rows = [];
+
+  for (const [id, changedEvents] of changedEventsByWord.entries()) {
+    const allEvents = state.sessionEvents.filter((event) => event.id === id);
+    const firstChanged = changedEvents[0];
+    const lastChanged = changedEvents.at(-1);
+    const word = state.wordsById.get(id);
+    const scoreValues = [
+      firstChanged.scoreBefore,
+      ...changedEvents.map((event) => event.scoreAfter)
+    ];
+    const deltas = changedEvents.map((event) => event.delta);
+    const responseTimes = allEvents.map((event) => event.responseMs);
+    const correct = allEvents.filter((event) => event.correct).length;
+    const wrong = allEvents.length - correct;
+    const scoreBefore = firstChanged.scoreBefore;
+    const scoreAfter = lastChanged.scoreAfter;
+
+    rows.push({
+      id,
+      word,
+      scoreBefore,
+      scoreAfter,
+      netChange: scoreAfter - scoreBefore,
+      attempts: allEvents.length,
+      correct,
+      wrong,
+      avgMs: average(responseTimes),
+      avgDelta: average(deltas),
+      minScore: Math.min(...scoreValues),
+      maxScore: Math.max(...scoreValues),
+      minDelta: Math.min(...deltas),
+      maxDelta: Math.max(...deltas)
+    });
+  }
+
+  return rows.sort((a, b) => {
+    if (a.netChange !== b.netChange) return a.netChange - b.netChange;
+    if (a.wrong !== b.wrong) return b.wrong - a.wrong;
+    return a.id.localeCompare(b.id);
+  });
+}
+
+function renderReportStats(rows) {
+  elements.reportStats.replaceChildren();
+  const stats = reportStatistics(rows);
+  const cards = [
+    ["Changed", String(stats.changedWords)],
+    ["Net change", signed(stats.netChange)],
+    ["Average", signed(Math.round(stats.averageChange))],
+    ["Median", signed(Math.round(stats.medianChange))],
+    ["Range", `${signed(stats.minChange)} to ${signed(stats.maxChange)}`],
+    ["Accuracy", `${stats.accuracy}%`],
+    ["Wrong", String(stats.wrong)],
+    ["Avg speed", `${stats.avgMs} ms`]
+  ];
+
+  elements.reportStats.append(
+    ...cards.map(([label, value]) => {
+      const card = document.createElement("div");
+      card.className = "report-stat";
+      const labelNode = document.createElement("span");
+      labelNode.textContent = label;
+      const valueNode = document.createElement("strong");
+      valueNode.textContent = value;
+      card.append(labelNode, valueNode);
+      return card;
+    })
+  );
+}
+
+function reportStatistics(rows) {
+  if (rows.length === 0) {
+    return {
+      changedWords: 0,
+      netChange: 0,
+      averageChange: 0,
+      medianChange: 0,
+      minChange: 0,
+      maxChange: 0,
+      accuracy: 0,
+      wrong: 0,
+      avgMs: 0
+    };
+  }
+
+  const changes = rows.map((row) => row.netChange);
+  const attempts = rows.reduce((total, row) => total + row.attempts, 0);
+  const correct = rows.reduce((total, row) => total + row.correct, 0);
+  const wrong = rows.reduce((total, row) => total + row.wrong, 0);
+  const responseTimes = rows.flatMap((row) =>
+    state.sessionEvents
+      .filter((event) => event.id === row.id)
+      .map((event) => event.responseMs)
+  );
+
+  return {
+    changedWords: rows.length,
+    netChange: changes.reduce((total, change) => total + change, 0),
+    averageChange: average(changes),
+    medianChange: median(changes),
+    minChange: Math.min(...changes),
+    maxChange: Math.max(...changes),
+    accuracy: attempts === 0 ? 0 : Math.round((correct / attempts) * 100),
+    wrong,
+    avgMs: Math.round(average(responseTimes))
+  };
+}
+
+function renderWordReportTable(rows) {
+  elements.wordReportBody.replaceChildren();
+
+  if (rows.length === 0) {
+    const row = document.createElement("tr");
+    const cell = document.createElement("td");
+    cell.colSpan = 9;
+    cell.className = "empty-report-cell";
+    cell.textContent = "No score changes in this session.";
+    row.append(cell);
+    elements.wordReportBody.append(row);
+    return;
+  }
+
+  elements.wordReportBody.append(...rows.map(createWordReportRow));
+}
+
+function createWordReportRow(row) {
+  const tr = document.createElement("tr");
+  tr.classList.toggle("negative-change", row.netChange < 0);
+  tr.classList.toggle("positive-change", row.netChange > 0);
+
+  tr.append(
+    tableCell(row.word?.korean || row.id, "word-cell"),
+    tableCell(secondLanguageText(row.word || {})),
+    tableCell(`${row.scoreBefore} -> ${row.scoreAfter}`),
+    tableCell(signed(row.netChange), "number-cell change-cell"),
+    tableCell(String(row.correct), "number-cell"),
+    tableCell(String(row.wrong), "number-cell"),
+    tableCell(String(row.attempts), "number-cell"),
+    tableCell(String(Math.round(row.avgMs)), "number-cell"),
+    tableCell(`${row.minScore}-${row.maxScore}`, "number-cell")
+  );
+  return tr;
+}
+
+function tableCell(text, className = "") {
+  const cell = document.createElement("td");
+  if (className) cell.className = className;
+  cell.textContent = text;
+  return cell;
+}
+
+function updateFocusButtons(rows) {
+  const hasRows = rows.length > 0;
+  elements.focusChanged.disabled = !hasRows;
+  elements.focusWorstHalf.disabled = !hasRows;
+  elements.focusBestHalf.disabled = !hasRows;
+  elements.focusWrong.disabled = !rows.some((row) => row.wrong > 0);
+}
+
+function startFocusSession(kind) {
+  const rows = state.reportRows.length > 0 ? state.reportRows : buildSessionWordReportRows();
+  const selectedRows = focusRowsForKind(rows, kind);
+  const labels = {
+    wrong: "words with wrong answers",
+    worst: "worst 50% from last session",
+    best: "best 50% from last session",
+    changed: "all changed words"
+  };
+  if (!applyFocusSelection(selectedRows.map((row) => row.id), labels[kind])) return;
+
+  elements.report.classList.add("hidden");
+  state.stopped = false;
+  resetSessionProgress();
+  resetCurrentBoardForTraining();
+  logMessage(`Focus session: ${labels[kind]} / ${selectedRows.length} words`);
+}
+
+function focusRowsForKind(rows, kind) {
+  if (kind === "wrong") return rows.filter((row) => row.wrong > 0);
+  if (kind === "worst") return rows.slice(0, Math.max(1, Math.ceil(rows.length / 2)));
+  if (kind === "best") return rows.slice(Math.floor(rows.length / 2));
+  return rows;
+}
+
+function average(values) {
+  if (!values.length) return 0;
+  return values.reduce((total, value) => total + value, 0) / values.length;
+}
+
+function median(values) {
+  if (!values.length) return 0;
+  const sorted = [...values].sort((a, b) => a - b);
+  const mid = Math.floor(sorted.length / 2);
+  return sorted.length % 2 === 0 ? (sorted[mid - 1] + sorted[mid]) / 2 : sorted[mid];
 }
 
 function drawScoreChart() {
@@ -1750,6 +2311,41 @@ function drawScoreChart() {
     );
     svg.append(path);
     colorIndex += 1;
+  }
+
+  const average = averageStepPath(
+    grouped,
+    margin,
+    plotWidth,
+    plotHeight,
+    maxAttempt,
+    minScore,
+    maxScore
+  );
+  if (average) {
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    path.classList.add("average-line");
+    path.setAttribute("d", average.path);
+    path.setAttribute(
+      "aria-label",
+      `Average score ${Math.round(average.startAverage)} to ${Math.round(average.endAverage)}`
+    );
+    svg.append(path);
+
+    const labelY = clamp(
+      average.endPoint.y - 8,
+      margin.top + 16,
+      margin.top + plotHeight - 8
+    );
+    const label = svgText(
+      `Average ${Math.round(average.endAverage)}`,
+      margin.left + plotWidth - 8,
+      labelY,
+      "average-label"
+    );
+    label.setAttribute("text-anchor", "end");
+    svg.append(label);
+    elements.reportMeta.textContent = `${state.changedIds.size} changed words / ${state.totalAttempts} attempts / average ${Math.round(average.startAverage)} -> ${Math.round(average.endAverage)}`;
   }
 }
 
@@ -1795,22 +2391,40 @@ function groupEventsByWord() {
 }
 
 function stepPath(events, margin, plotWidth, plotHeight, maxAttempt, minScore, maxScore) {
-  const point = (attempt, score) => {
-    const x = margin.left + (plotWidth * attempt) / maxAttempt;
-    const y =
-      margin.top +
-      plotHeight -
-      (plotHeight * (score - minScore)) / (maxScore - minScore);
-    return { x, y };
-  };
-
   const first = events[0];
-  let current = point(first.attempt - 1, first.scoreBefore);
+  let current = chartPoint(
+    first.attempt - 1,
+    first.scoreBefore,
+    margin,
+    plotWidth,
+    plotHeight,
+    maxAttempt,
+    minScore,
+    maxScore
+  );
   const parts = [`M ${current.x.toFixed(2)} ${current.y.toFixed(2)}`];
 
   for (const event of events) {
-    const before = point(event.attempt, event.scoreBefore);
-    const after = point(event.attempt, event.scoreAfter);
+    const before = chartPoint(
+      event.attempt,
+      event.scoreBefore,
+      margin,
+      plotWidth,
+      plotHeight,
+      maxAttempt,
+      minScore,
+      maxScore
+    );
+    const after = chartPoint(
+      event.attempt,
+      event.scoreAfter,
+      margin,
+      plotWidth,
+      plotHeight,
+      maxAttempt,
+      minScore,
+      maxScore
+    );
     parts.push(`L ${before.x.toFixed(2)} ${before.y.toFixed(2)}`);
     parts.push(`L ${after.x.toFixed(2)} ${after.y.toFixed(2)}`);
     current = after;
@@ -1818,6 +2432,94 @@ function stepPath(events, margin, plotWidth, plotHeight, maxAttempt, minScore, m
 
   parts.push(`L ${(margin.left + plotWidth).toFixed(2)} ${current.y.toFixed(2)}`);
   return parts.join(" ");
+}
+
+function averageStepPath(grouped, margin, plotWidth, plotHeight, maxAttempt, minScore, maxScore) {
+  const ids = Array.from(grouped.keys());
+  if (ids.length === 0) return null;
+
+  const scores = new Map(ids.map((id) => [id, grouped.get(id)[0].scoreBefore]));
+  const eventsByAttempt = new Map();
+  for (const events of grouped.values()) {
+    for (const event of events) {
+      if (!eventsByAttempt.has(event.attempt)) eventsByAttempt.set(event.attempt, []);
+      eventsByAttempt.get(event.attempt).push(event);
+    }
+  }
+
+  const averageScore = () => {
+    let total = 0;
+    for (const score of scores.values()) total += score;
+    return total / scores.size;
+  };
+
+  const startAverage = averageScore();
+  let currentAverage = startAverage;
+  let current = chartPoint(
+    0,
+    currentAverage,
+    margin,
+    plotWidth,
+    plotHeight,
+    maxAttempt,
+    minScore,
+    maxScore
+  );
+  const parts = [`M ${current.x.toFixed(2)} ${current.y.toFixed(2)}`];
+
+  for (let attempt = 1; attempt <= maxAttempt; attempt += 1) {
+    const before = chartPoint(
+      attempt,
+      currentAverage,
+      margin,
+      plotWidth,
+      plotHeight,
+      maxAttempt,
+      minScore,
+      maxScore
+    );
+    parts.push(`L ${before.x.toFixed(2)} ${before.y.toFixed(2)}`);
+
+    const events = eventsByAttempt.get(attempt) || [];
+    for (const event of events) {
+      scores.set(event.id, event.scoreAfter);
+    }
+
+    const nextAverage = averageScore();
+    if (nextAverage !== currentAverage) {
+      const after = chartPoint(
+        attempt,
+        nextAverage,
+        margin,
+        plotWidth,
+        plotHeight,
+        maxAttempt,
+        minScore,
+        maxScore
+      );
+      parts.push(`L ${after.x.toFixed(2)} ${after.y.toFixed(2)}`);
+      current = after;
+    } else {
+      current = before;
+    }
+    currentAverage = nextAverage;
+  }
+
+  return {
+    path: parts.join(" "),
+    startAverage,
+    endAverage: currentAverage,
+    endPoint: current
+  };
+}
+
+function chartPoint(attempt, score, margin, plotWidth, plotHeight, maxAttempt, minScore, maxScore) {
+  const x = margin.left + (plotWidth * attempt) / maxAttempt;
+  const y =
+    margin.top +
+    plotHeight -
+    (plotHeight * (score - minScore)) / (maxScore - minScore);
+  return { x, y };
 }
 
 function highlightLine(event, id) {
@@ -1857,7 +2559,7 @@ function clearLineHighlight() {
 }
 
 function signed(value) {
-  return value >= 0 ? `+${value}` : String(value);
+  return value > 0 ? `+${value}` : String(value);
 }
 
 function escapeHtml(value) {

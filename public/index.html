@@ -56,6 +56,39 @@
         </div>
       </section>
 
+      <section class="training-panel" aria-label="Training selection">
+        <form class="training-form" id="trainingForm">
+          <label class="training-control training-keywords">
+            <span>Keywords</span>
+            <input id="keywordFilter" type="search" autocomplete="off" placeholder="topic, translation, Korean">
+          </label>
+          <label class="training-control">
+            <span>Min score</span>
+            <input id="scoreMin" type="number" min="0" max="1000" step="1" inputmode="numeric">
+          </label>
+          <label class="training-control">
+            <span>Max score</span>
+            <input id="scoreMax" type="number" min="0" max="1000" step="1" inputmode="numeric">
+          </label>
+          <label class="training-control">
+            <span>Words</span>
+            <input id="wordCount" type="number" min="1" step="1" inputmode="numeric">
+          </label>
+          <label class="training-control">
+            <span>Focus</span>
+            <select id="selectionMode">
+              <option value="lowest">Lowest score</option>
+              <option value="least">Least practiced</option>
+              <option value="highest">Highest score</option>
+              <option value="random">Random</option>
+            </select>
+          </label>
+          <button class="stop-button" type="submit">Apply</button>
+          <button class="icon-button" id="resetTraining" type="button">All</button>
+        </form>
+        <div class="training-summary" id="selectionSummary"></div>
+      </section>
+
       <section class="mode-banner hidden" id="modeBanner" aria-live="polite">
         <div>
           <span id="modeBadge">Special mode</span>
@@ -119,6 +152,33 @@
         <div class="chart-wrap">
           <svg id="scoreChart" viewBox="0 0 920 420" role="img" aria-label="Score progression chart"></svg>
           <div class="tooltip hidden" id="chartTooltip"></div>
+        </div>
+        <div class="report-details">
+          <div class="report-stats" id="reportStats"></div>
+          <div class="focus-actions" aria-label="Follow-up focus sessions">
+            <button class="icon-button" id="focusWrong" type="button">Wrong answers</button>
+            <button class="icon-button" id="focusWorstHalf" type="button">Worst 50%</button>
+            <button class="icon-button" id="focusBestHalf" type="button">Best 50%</button>
+            <button class="icon-button" id="focusChanged" type="button">All changed</button>
+          </div>
+          <div class="word-report-wrap">
+            <table class="word-report-table" id="wordReportTable">
+              <thead>
+                <tr>
+                  <th scope="col">Word</th>
+                  <th scope="col">Translation</th>
+                  <th scope="col">Score</th>
+                  <th scope="col">Change</th>
+                  <th scope="col">Correct</th>
+                  <th scope="col">Wrong</th>
+                  <th scope="col">Attempts</th>
+                  <th scope="col">Avg ms</th>
+                  <th scope="col">Range</th>
+                </tr>
+              </thead>
+              <tbody id="wordReportBody"></tbody>
+            </table>
+          </div>
         </div>
       </section>
     </main>
