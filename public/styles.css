@@ -1,17 +1,26 @@
 :root {
   color-scheme: light;
-  --bg: #f6f7f3;
+  --bg: #f7f8f3;
   --panel: #ffffff;
-  --ink: #17201b;
-  --muted: #66716b;
-  --line: #d9dfd8;
-  --left: #0f766e;
-  --left-soft: #dff5f1;
-  --right: #934b00;
-  --right-soft: #fff0dc;
-  --accent: #3157a4;
-  --danger: #b3261e;
-  --good: #257947;
+  --ink: #151a17;
+  --muted: #4f5b55;
+  --line: #cbd4cd;
+  --left: #00726f;
+  --left-soft: #e6f5f2;
+  --right: #b45f00;
+  --right-soft: #fff2df;
+  --accent: #005ea8;
+  --accent-soft: #eaf2ff;
+  --danger: #b94f00;
+  --danger-soft: #fff0e5;
+  --danger-ink: #773400;
+  --good: #007a4d;
+  --good-soft: #e8f5ee;
+  --good-ink: #005236;
+  --mode: #6750b5;
+  --mode-soft: #f1edff;
+  --mode-line: #c9bbff;
+  --focus-ring: #163f7a;
   --shadow: 0 18px 50px rgba(25, 37, 32, 0.12);
 }
 
@@ -30,19 +39,26 @@ body {
 }
 
 body.special-mode {
-  background: #f4f6fb;
+  background: #f5f7fc;
 }
 
 body.theme-writing {
-  background: #f2f7ff;
+  background: #f1f7ff;
 }
 
 body.passive-mode {
-  background: #f4f7f1;
+  background: #f3f8f4;
 }
 
 button {
   font: inherit;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--focus-ring) !important;
+  outline-offset: 2px;
 }
 
 .app {
@@ -134,9 +150,10 @@ h2 {
 
 .icon-button.active {
   border-color: var(--good);
-  background: #eaf7ef;
-  color: #1d5e36;
+  background: var(--good-soft);
+  color: var(--good-ink);
   font-weight: 800;
+  box-shadow: inset 0 -4px 0 var(--good);
 }
 
 .stop-button {
@@ -153,6 +170,7 @@ h2 {
 }
 
 .stat {
+  position: relative;
   min-height: 72px;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -175,8 +193,25 @@ h2 {
 }
 
 .challenge-stat.active {
-  border-color: #7b5bd6;
-  background: #f0ebff;
+  border-color: var(--mode);
+  background: var(--mode-soft);
+  box-shadow: inset 0 -4px 0 var(--mode);
+}
+
+.challenge-stat.active::after {
+  content: "On";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: 1px solid var(--mode);
+  border-radius: 999px;
+  background: #ffffff;
+  color: #463080;
+  padding: 3px 7px;
+  font-size: 0.64rem;
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .training-panel {
@@ -245,19 +280,19 @@ h2 {
   justify-content: space-between;
   gap: 18px;
   margin: -4px 0 20px;
-  border: 1px solid #c7b8ff;
-  border-left: 8px solid #7b5bd6;
+  border: 1px solid var(--mode-line);
+  border-left: 8px solid var(--mode);
   border-radius: 8px;
-  background: #f0ebff;
+  background: var(--mode-soft);
   padding: 14px 16px;
 }
 
 .mode-banner span {
   display: block;
-  color: #5f43b2;
+  color: #463080;
   font-size: 0.78rem;
   font-weight: 900;
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
@@ -269,31 +304,31 @@ h2 {
 }
 
 .mode-detail {
-  color: #4a3a84;
+  color: #463080;
   font-weight: 700;
   text-align: right;
 }
 
 body.theme-writing .mode-banner {
-  border-color: #99bdf4;
-  border-left-color: #3157a4;
-  background: #eaf2ff;
+  border-color: #9fc9f2;
+  border-left-color: var(--accent);
+  background: var(--accent-soft);
 }
 
 body.theme-writing .mode-banner span,
 body.theme-writing .mode-detail {
-  color: #244d91;
+  color: #084a84;
 }
 
 body.passive-mode .mode-banner {
-  border-color: #a8d7b7;
+  border-color: #9ed4b8;
   border-left-color: var(--good);
-  background: #edf8f1;
+  background: var(--good-soft);
 }
 
 body.passive-mode .mode-banner span,
 body.passive-mode .mode-detail {
-  color: #1d5e36;
+  color: var(--good-ink);
 }
 
 .writing-panel {
@@ -302,7 +337,7 @@ body.passive-mode .mode-detail {
 }
 
 .writing-shell {
-  border: 1px solid #b8cbed;
+  border: 1px solid #9fc9f2;
   border-radius: 8px;
   background: #ffffff;
   box-shadow: var(--shadow);
@@ -346,7 +381,7 @@ body.passive-mode .mode-detail {
 .writing-form input {
   width: 100%;
   min-height: 58px;
-  border: 2px solid #b8cbed;
+  border: 2px solid #9fc9f2;
   border-radius: 8px;
   background: #fbfdff;
   color: var(--ink);
@@ -358,17 +393,34 @@ body.passive-mode .mode-detail {
 
 .writing-form input:focus {
   border-color: var(--accent);
-  outline: none;
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
 }
 
 .writing-form input.correct {
   border-color: var(--good);
-  background: #edf8f1;
+  background-color: var(--good-soft);
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(0, 122, 77, 0.12) 0,
+    rgba(0, 122, 77, 0.12) 5px,
+    transparent 5px,
+    transparent 18px
+  );
+  box-shadow: inset 8px 0 0 var(--good);
 }
 
 .writing-form input.wrong {
   border-color: var(--danger);
-  background: #fff0ef;
+  background-color: var(--danger-soft);
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(185, 79, 0, 0.14) 0,
+    rgba(185, 79, 0, 0.14) 5px,
+    transparent 5px,
+    transparent 15px
+  );
+  box-shadow: inset 8px 0 0 var(--danger);
 }
 
 .writing-progress {
@@ -398,7 +450,7 @@ body.passive-mode .mode-detail {
   color: var(--muted);
   font-size: 0.82rem;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0;
 }
 
 .slot-grid {
@@ -431,7 +483,7 @@ body.passive-mode .mode-detail {
 
 .exp-pop {
   position: absolute;
-  top: 10px;
+  top: 42px;
   right: 12px;
   z-index: 6;
   color: var(--good);
@@ -505,14 +557,36 @@ body.passive-mode .mode-detail {
 
 .slot.selected {
   border-color: var(--accent);
+  outline: 3px dashed var(--accent);
+  outline-offset: 2px;
 }
 
 .slot.correct {
   border-color: var(--good);
+  background:
+    repeating-linear-gradient(
+      135deg,
+      rgba(0, 122, 77, 0.11) 0,
+      rgba(0, 122, 77, 0.11) 6px,
+      transparent 6px,
+      transparent 20px
+    ),
+    var(--good-soft);
+  box-shadow: var(--shadow), inset 0 -6px 0 var(--good);
 }
 
 .slot.wrong {
   border-color: var(--danger);
+  background:
+    repeating-linear-gradient(
+      45deg,
+      rgba(185, 79, 0, 0.13) 0,
+      rgba(185, 79, 0, 0.13) 6px,
+      transparent 6px,
+      transparent 18px
+    ),
+    var(--danger-soft);
+  box-shadow: var(--shadow), inset 0 -6px 0 var(--danger);
 }
 
 .slot.cleared {
@@ -540,6 +614,51 @@ body.passive-mode .mode-detail {
   font-size: 0.84rem;
   font-weight: 800;
   text-transform: uppercase;
+}
+
+.slot-status {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 7;
+  min-width: 34px;
+  max-width: calc(100% - 54px);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--ink);
+  padding: 4px 7px;
+  font-size: 0.64rem;
+  font-weight: 900;
+  line-height: 1;
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.slot-status.selected {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: #084a84;
+}
+
+.slot-status.correct {
+  border-color: var(--good);
+  background: var(--good-soft);
+  color: var(--good-ink);
+}
+
+.slot-status.wrong {
+  border-color: var(--danger);
+  background: var(--danger-soft);
+  color: var(--danger-ink);
+}
+
+.slot-status.hint {
+  background: #eef1f0;
+  color: #59635d;
 }
 
 .slot-main {
@@ -648,12 +767,12 @@ body.passive-mode .mode-detail {
 }
 
 .axis {
-  stroke: #8c958f;
+  stroke: #68746d;
   stroke-width: 1;
 }
 
 .gridline {
-  stroke: #e7ebe6;
+  stroke: #e2e8e2;
   stroke-width: 1;
 }
 
@@ -664,21 +783,21 @@ body.passive-mode .mode-detail {
 
 .score-line {
   fill: none;
-  stroke-width: 1.4;
+  stroke-width: 1.8;
   stroke-linejoin: round;
   stroke-linecap: round;
-  opacity: 0.22;
+  opacity: 0.68;
   cursor: pointer;
 }
 
 .score-line:hover,
 .score-line.active {
-  stroke-width: 3.5;
-  opacity: 0.78;
+  stroke-width: 3.8;
+  opacity: 0.92;
 }
 
 .score-line.dimmed {
-  opacity: 0.06;
+  opacity: 0.1;
 }
 
 .average-line {

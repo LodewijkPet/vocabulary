@@ -167,16 +167,28 @@ const TOPIC_LABELS = {
 };
 
 const COLORS = [
-  "#3157a4",
-  "#0f766e",
-  "#934b00",
-  "#7b3f98",
-  "#b3261e",
-  "#257947",
-  "#6d5a00",
-  "#5967a8",
-  "#9a4f7a",
-  "#006d91"
+  "#0072b2",
+  "#d55e00",
+  "#009e73",
+  "#cc79a7",
+  "#e69f00",
+  "#56b4e9",
+  "#6a3d9a",
+  "#8a6f00",
+  "#006d91",
+  "#7f3c8d"
+];
+const CHART_LINE_PATTERNS = [
+  "",
+  "8 4",
+  "2 4",
+  "10 3 2 3",
+  "6 2 2 2",
+  "1 5",
+  "12 4",
+  "4 6",
+  "9 2 2 2 2 2",
+  "3 3"
 ];
 
 const state = {
@@ -1500,6 +1512,12 @@ function render() {
   elements.correctStat.textContent = String(state.correct);
   elements.wrongStat.textContent = String(state.wrong);
   elements.challengeStat.classList.toggle("active", Boolean(state.activeChallenge));
+  elements.challengeStat.setAttribute(
+    "aria-label",
+    state.activeChallenge
+      ? `Challenge active, ${state.activeChallenge.points} points`
+      : "Challenge inactive"
+  );
   elements.challengeScore.textContent = state.activeChallenge
     ? String(state.activeChallenge.points)
     : "0";
@@ -1605,6 +1623,7 @@ function prepareWritingPrompt() {
   state.writingRound.promptStartedAt = performance.now();
   elements.writingInput.value = "";
   elements.writingInput.classList.remove("correct", "wrong");
+  elements.writingInput.setAttribute("aria-invalid", "false");
   const task = currentWritingTask();
   if (task?.promptKind === "sound" && state.soundEnabled) {
     setTimeout(() => speak(task.word.korean), 120);
@@ -1665,6 +1684,7 @@ async function handleWritingSubmit(event) {
   const responseMs = Math.max(0, Math.round(performance.now() - round.promptStartedAt));
   state.locked = true;
   elements.writingInput.classList.add(correct ? "correct" : "wrong");
+  elements.writingInput.setAttribute("aria-invalid", correct ? "false" : "true");
 
   try {
     const payload = {
@@ -1716,6 +1736,7 @@ function handleWritingCorrection(answer) {
   const correct = normalizeKoreanAnswer(answer) === normalizeKoreanAnswer(task.word.korean);
   elements.writingInput.classList.toggle("correct", correct);
   elements.writingInput.classList.toggle("wrong", !correct);
+  elements.writingInput.setAttribute("aria-invalid", correct ? "false" : "true");
 
   if (!correct) {
     elements.writingInput.value = "";
@@ -1883,6 +1904,9 @@ function createSentenceRow(sentence) {
 
 function createSlotButton(side, slot, index) {
   const hiddenByHint = side === "right" && isRightHiddenByHint(index);
+  const selected =
+    (side === "left" && state.selectedLeft === index) ||
+    (side === "right" && state.selectedRight === index);
   const button = document.createElement("button");
   button.type = "button";
   button.className = [
@@ -1890,19 +1914,21 @@ function createSlotButton(side, slot, index) {
     slot.status,
     slot.cleared ? "cleared" : "",
     hiddenByHint ? "hidden-hint" : "",
-    side === "left" && state.selectedLeft === index ? "selected" : "",
-    side === "right" && state.selectedRight === index ? "selected" : ""
+    selected ? "selected" : ""
   ]
     .filter(Boolean)
     .join(" ");
   button.dataset.side = side;
   button.dataset.index = String(index);
   button.disabled = state.stopped || state.passiveAuto.active || slot.cleared || hiddenByHint;
-  button.setAttribute("aria-label", `${slot.key.toUpperCase()} ${slot.word.korean}`);
+  button.setAttribute("aria-label", slotAriaLabel(side, slot, hiddenByHint, selected));
+  button.setAttribute("aria-pressed", selected ? "true" : "false");
 
   const key = document.createElement("span");
   key.className = "slot-key";
   key.textContent = slot.key;
+
+  const status = createSlotStatus(slot.status, selected, hiddenByHint);
 
   const main = document.createElement("span");
   main.className = "slot-main";
@@ -1917,7 +1943,55 @@ function createSlotButton(side, slot, index) {
   sub.textContent = hiddenByHint ? "Hint removed" : renderSlotSub(side, slot.word);
 
   button.append(key, main, sub);
+  if (status) button.append(status);
   return button;
+}
+
+function createSlotStatus(status, selected, hiddenByHint) {
+  const text = slotStatusText(status, selected, hiddenByHint);
+  if (!text) return null;
+  const statusNode = document.createElement("span");
+  statusNode.className = [
+    "slot-status",
+    hiddenByHint ? "hint" : "",
+    status || "",
+    selected && !status && !hiddenByHint ? "selected" : ""
+  ]
+    .filter(Boolean)
+    .join(" ");
+  statusNode.textContent = text;
+  statusNode.setAttribute("aria-hidden", "true");
+  return statusNode;
+}
+
+function slotStatusText(status, selected, hiddenByHint) {
+  if (hiddenByHint) return "Hint";
+  if (status === "correct") return "OK";
+  if (status === "wrong") return "Try";
+  if (selected) return "Pick";
+  return "";
+}
+
+function slotAriaLabel(side, slot, hiddenByHint, selected) {
+  const status = slotAccessibilityStatus(slot.status, selected, hiddenByHint);
+  const main = slotMainLabel(side, slot.word, hiddenByHint);
+  const sub = hiddenByHint ? "hint removed" : renderSlotSub(side, slot.word);
+  return [slot.key.toUpperCase(), status, main, sub].filter(Boolean).join(", ");
+}
+
+function slotAccessibilityStatus(status, selected, hiddenByHint) {
+  if (hiddenByHint) return "hidden by hint";
+  if (status === "correct") return "correct match";
+  if (status === "wrong") return "wrong match, try another answer";
+  if (selected) return "selected";
+  return "";
+}
+
+function slotMainLabel(side, word, hiddenByHint) {
+  if (hiddenByHint) return "Hidden answer";
+  const kind = side === "left" ? state.currentTheme.promptKind : state.currentTheme.answerKind;
+  if (kind === "sound") return "Speech prompt";
+  return textForKind(kind, word);
 }
 
 function renderSlotMain(side, word) {
@@ -2300,6 +2374,8 @@ function drawScoreChart() {
     const word = state.wordsById.get(id);
     path.classList.add("score-line");
     path.setAttribute("stroke", COLORS[colorIndex % COLORS.length]);
+    const linePattern = CHART_LINE_PATTERNS[colorIndex % CHART_LINE_PATTERNS.length];
+    if (linePattern) path.setAttribute("stroke-dasharray", linePattern);
     path.setAttribute("d", stepPath(events, margin, plotWidth, plotHeight, maxAttempt, minScore, maxScore));
     path.dataset.id = id;
     path.addEventListener("mouseenter", (event) => highlightLine(event, id));
